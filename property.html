@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cascade Apartment 3 — Mt Baw Baw Alpine Retreat</title>
+  <meta name="description" content="Book Cascade Apartment 6 at Mt Baw Baw — a self-contained alpine retreat with ski-in/ski-out access, wood fireplace, hot tub, and stunning mountain views.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* ===== Property Page Specific Styles ===== */
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 200px 200px;
+      gap: 8px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 100px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover { opacity: 0.9; }
+    .gallery-item:first-child {
+      grid-row: 1 / 3;
+    }
+    .gallery-item .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gallery-btn {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.95);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .gallery-btn:hover { background: #fff; }
+
+    /* Property Header */
+    .property-header {
+      padding: 24px 0 16px;
+    }
+    .property-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .property-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 0 0 8px;
+    }
+    .property-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    .property-meta svg {
+      width: 16px;
+      height: 16px;
+      vertical-align: -2px;
+    }
+    .property-location {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .property-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: #f59e0b;
+    }
+    .property-rating .rating-count {
+      color: #555;
+    }
+    .property-type-badge {
+      display: inline-block;
+      background: #e8f4fd;
+      color: #1a73a7;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .property-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .property-actions .btn-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .property-actions .btn-icon:hover {
+      border-color: #1a73a7;
+      color: #1a73a7;
+    }
+    .property-actions .btn-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Layout */
+    .property-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      padding: 32px 0 64px;
+      align-items: start;
+    }
+
+    /* Tabs */
+    .property-tabs {
+      display: flex;
+      border-bottom: 2px solid #eee;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .property-tabs::-webkit-scrollbar { display: none; }
+    .property-tab {
+      padding: 12px 24px;
+      border: none;
+      background: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #777;
+      cursor: pointer;
+      position: relative;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+    .property-tab:hover { color: #1a1a2e; }
+    .property-tab.active {
+      color: #1a73a7;
+    }
+    .property-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #1a73a7;
+      border-radius: 2px 2px 0 0;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 32px 0;
+    }
+    .tab-content.active { display: block; }
+
+    /* Overview Tab */
+    .property-description {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 32px;
+    }
+    .property-description p { margin-bottom: 16px; }
+
+    .key-features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .feature-card {
+      text-align: center;
+      padding: 24px 16px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      transition: transform 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-2px); }
+    .feature-card svg {
+      width: 32px;
+      height: 32px;
+      color: #1a73a7;
+      margin-bottom: 8px;
+    }
+    .feature-card .feature-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      display: block;
+    }
+    .feature-card .feature-label {
+      font-size: 0.8rem;
+      color: #777;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* Amenities Tab */
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .amenity-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      color: #333;
+      transition: background 0.2s;
+    }
+    .amenity-item:hover { background: #e8f4fd; }
+    .amenity-item svg {
+      width: 24px;
+      height: 24px;
+      color: #1a73a7;
+      flex-shrink: 0;
+    }
+
+    /* Rates Tab */
+    .rates-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .rate-card {
+      border: 2px solid #eee;
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .rate-card:hover {
+      border-color: #1a73a7;
+      box-shadow: 0 4px 20px rgba(26,115,167,0.12);
+    }
+    .rate-card.featured {
+      border-color: #1a73a7;
+      background: linear-gradient(to bottom, #e8f4fd, #fff);
+    }
+    .rate-card.featured::before {
+      content: 'Best Value';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a73a7;
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .rate-season {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #777;
+      margin-bottom: 4px;
+    }
+    .rate-dates {
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 16px;
+    }
+    .rate-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .rate-price span {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #777;
+    }
+    .rate-note {
+      font-size: 0.85rem;
+      color: #999;
+      margin-top: 8px;
+    }
+    .rates-footnote {
+      font-size: 0.85rem;
+      color: #777;
+      font-style: italic;
+    }
+
+    /* Reviews Tab */
+    .reviews-summary {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 24px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      margin-bottom: 32px;
+    }
+    .reviews-score {
+      text-align: center;
+      min-width: 80px;
+    }
+    .reviews-score .score {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1a73a7;
+      line-height: 1;
+    }
+    .reviews-score .label {
+      font-size: 0.8rem;
+      color: #777;
+      margin-top: 4px;
+    }
+    .reviews-bars {
+      flex: 1;
+    }
+    .review-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
+      color: #555;
+    }
+    .review-bar-row .bar-label { width: 80px; }
+    .review-bar {
+      flex: 1;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .review-bar-fill {
+      height: 100%;
+      background: #f59e0b;
+      border-radius: 4px;
+    }
+
+    .review-card {
+      padding: 24px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .review-card:last-child { border-bottom: none; }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .review-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+    .review-author-info { flex: 1; }
+    .review-author {
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 2px;
+    }
+    .review-date {
+      font-size: 0.8rem;
+      color: #999;
+    }
+    .review-stars {
+      color: #f59e0b;
+      display: flex;
+      gap: 2px;
+    }
+    .review-stars svg { width: 16px; height: 16px; }
+    .review-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    /* Location Tab */
+    .location-map-placeholder {
+      width: 100%;
+      height: 350px;
+      background: linear-gradient(135deg, #e8f4fd, #d1ecf9);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a73a7;
+      font-size: 1rem;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .location-map-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 49%, #c0dff0 49%, #c0dff0 51%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, #c0dff0 49%, #c0dff0 51%, transparent 51%);
+      background-size: 40px 40px;
+      opacity: 0.5;
+    }
+    .location-map-placeholder .map-pin {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .location-map-placeholder .map-pin svg {
+      width: 48px;
+      height: 48px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+    .location-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .location-detail-card {
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 12px;
+    }
+    .location-detail-card h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .location-detail-card h4 svg {
+      width: 18px;
+      height: 18px;
+      color: #1a73a7;
+    }
+    .location-detail-card p,
+    .location-detail-card li {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    .location-detail-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .location-detail-card li {
+      padding: 4px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Booking Sidebar */
+    .booking-sidebar {
+      position: sticky;
+      top: 100px;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .booking-price-header {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .booking-price-header .price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .booking-price-header .per-night {
+      font-size: 0.9rem;
+      color: #777;
+    }
+    .booking-form {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .booking-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .booking-form-row + .booking-form-field {
+      border-top: 1px solid #ddd;
+    }
+    .booking-form-field {
+      padding: 12px 16px;
+    }
+    .booking-form-row .booking-form-field:first-child {
+      border-right: 1px solid #ddd;
+    }
+    .booking-form-field label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .booking-form-field input,
+    .booking-form-field select {
+      width: 100%;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: #555;
+      background: transparent;
+      padding: 0;
+      outline: none;
+    }
+    .btn-book {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #1a73a7, #2196F3);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-bottom: 16px;
+    }
+    .btn-book:hover {
+      background: linear-gradient(135deg, #155d87, #1976D2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(26,115,167,0.35);
+    }
+    .booking-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 20px;
+    }
+    .price-breakdown {
+      border-top: 1px solid #eee;
+      padding-top: 16px;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .price-row .label { text-decoration: underline; text-decoration-style: dotted; cursor: help; }
+    .price-row.total {
+      border-top: 1px solid #eee;
+      margin-top: 8px;
+      padding-top: 16px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #1a1a2e;
+    }
+    .cancellation-note {
+      margin-top: 20px;
+      padding: 16px;
+      background: #f0f9f4;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      color: #2d6a4f;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .cancellation-note svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Similar Properties */
+    .similar-properties {
+      padding: 64px 0;
+      border-top: 1px solid #eee;
+    }
+    .similar-properties h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 32px;
+    }
+    .similar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .similar-card {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #eee;
+      transition: all 0.3s;
+    }
+    .similar-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    }
+    .similar-card-img {
+      height: 200px;
+      position: relative;
+    }
+    .similar-card-body {
+      padding: 20px;
+    }
+    .similar-card-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 4px;
+    }
+    .similar-card-body .location {
+      font-size: 0.85rem;
+      color: #777;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .similar-card-body .location svg {
+      width: 14px;
+      height: 14px;
+    }
+    .similar-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .similar-card-footer .price {
+      font-weight: 700;
+      color: #1a1a2e;
+      font-size: 1.1rem;
+    }
+    .similar-card-footer .price span {
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: #777;
+    }
+    .similar-card-footer .rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+    .similar-card-footer .rating svg {
+      width: 14px;
+      height: 14px;
+      color: #f59e0b;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .property-layout {
+        grid-template-columns: 1fr;
+      }
+      .booking-sidebar {
+        position: static;
+        order: -1;
+      }
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 250px 150px;
+      }
+      .gallery-item:first-child {
+        grid-column: 1 / 3;
+        grid-row: auto;
+      }
+      .gallery-item:nth-child(4),
+      .gallery-item:nth-child(5) {
+        display: none;
+      }
+    }
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: 1fr;
+        grid-template-rows: 280px;
+      }
+      .gallery-item:first-child {
+        grid-column: auto;
+      }
+      .gallery-item:nth-child(2),
+      .gallery-item:nth-child(3),
+      .gallery-item:nth-child(4),
+      .gallery-item:nth-child(5) {
+        display: none;
+      }
+      .property-title { font-size: 1.5rem; }
+      .key-features { grid-template-columns: repeat(2, 1fr); }
+      .amenities-grid { grid-template-columns: repeat(2, 1fr); }
+      .rates-grid { grid-template-columns: 1fr; }
+      .similar-grid { grid-template-columns: 1fr; }
+      .location-details { grid-template-columns: 1fr; }
+    }
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0,0,0,0.94);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox-img-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 4px;
+      display: block;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: rgba(255,255,255,0.12);
+      border: none;
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.28); }
+    .lightbox-close svg { width: 22px; height: 22px; }
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.12);
+      border: none;
+      color: #fff;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+    .lightbox-prev:hover,
+    .lightbox-next:hover { background: rgba(255,255,255,0.28); }
+    .lightbox-prev svg,
+    .lightbox-next svg { width: 28px; height: 28px; }
+    .lightbox-counter {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.65);
+      font-size: 0.875rem;
+      letter-spacing: 0.5px;
+    }
+    .gallery-item img { cursor: pointer; }
+
+    /* Winter Season rate card */
+    .rate-card.winter {
+      border: 1.5px solid #cdd6df;
+      background: linear-gradient(to bottom, #ffffff 0%, #e4ebf0 100%);
+      box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+    }
+    .rate-card.winter:hover {
+      border-color: #a8b8c8;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.11);
+    }
+    .rate-card.winter::before {
+      content: 'White Season';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #5b8fa8;
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .rate-card.winter .rate-season { color: #4a7a96; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 36 L15 9 L27 36Z" fill="currentColor" fill-opacity="0.42"/>
+          <path d="M17 36 L30 3 L43 36Z" fill="currentColor"/>
+          <path d="M30 3 L36.5 17 L23.5 17Z" fill="currentColor" fill-opacity="0.22"/>
+          <path d="M1 40 Q5.5 37.2 10 40 Q14.5 42.8 19 40 Q23.5 37.2 28 40 Q32.5 42.8 37 40 Q39.5 38.5 43 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+        <span class="logo-wordmark">
+          <span class="logo-wordmark-main">Cascade</span>
+          <span class="logo-wordmark-sub">Apartment 3</span>
+        </span>
+      </a>
+      <nav class="nav-main">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="property.html" class="nav-link nav-link--active">The Apartment</a>
+        <a href="search.html" class="nav-link">Gallery</a>
+        <a href="property.html#tab-rates" class="nav-link">Rates</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="booking.html" class="btn btn--sm btn--primary">Book Now</a>
+      </div>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="property.html" class="nav-link nav-link--active">The Apartment</a>
+    <a href="search.html" class="nav-link">Gallery</a>
+    <a href="property.html#tab-rates" class="nav-link">Rates</a>
+    <a href="booking.html" class="btn btn--primary btn--block">Book Now</a>
+  </nav>
+
+  <!-- Photo Gallery -->
+  <div class="container">
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="images/20240425_111536.jpg" alt="Cascade Apartment 3" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item">
+        <img src="images/20240515_094048.jpg" alt="Cascade Apartment 3 interior" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item">
+        <img src="images/20220423_171724.jpg" alt="Cascade Apartment 3 living area" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item">
+        <img src="images/20220224_110708.jpg" alt="Cascade Apartment 3 bedroom" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="gallery-item">
+        <img src="images/20230218_132555.jpg" alt="Cascade Apartment 3 views" style="width:100%;height:100%;object-fit:cover;">
+        <button class="gallery-btn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Show all photos
+        </button>
+      </div>
+    </div>
+
+    <!-- Property Header -->
+    <div class="property-header">
+      <div class="property-header-top">
+        <div>
+          <h1 class="property-title">Cascade Apartment 3</h1>
+          <div class="property-meta">
+            <span class="property-location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Baw Baw Village, Mt Baw Baw, VIC 3833
+            </span>
+            <span class="property-rating">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span class="rating-count">(28 reviews)</span>
+            </span>
+            <span class="property-type-badge">Apartment</span>
+          </div>
+        </div>
+        <div class="property-actions">
+          <button class="btn-icon" aria-label="Share property">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </button>
+          <button class="btn-icon" aria-label="Save property">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Property Layout: Content + Booking Sidebar -->
+    <div class="property-layout">
+      <!-- Main Content -->
+      <div class="property-main">
+        <!-- Tabs Navigation -->
+        <div class="property-tabs">
+          <button class="property-tab active" data-tab="overview">Overview</button>
+          <button class="property-tab" data-tab="amenities">Amenities</button>
+          <button class="property-tab" data-tab="rates">Rates</button>
+          <button class="property-tab" data-tab="reviews">Reviews</button>
+          <button class="property-tab" data-tab="location">Location</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div class="tab-content active" id="tab-overview">
+          <div class="property-description">
+            <p>Welcome to Cascade Apartment 3, a recently renovated, fully self-contained apartment set over two levels in the heart of Baw Baw Village at Mt Baw Baw. Nestled among snowgum trees with direct ski-in/ski-out access, this alpine retreat is the perfect base for all seasons — from winter skiing to summer hiking and mountain biking.</p>
+            <p>The large open-plan living and dining area features three couches, a flat-screen TV, CD player, and a gas log fire to keep you warm après-ski. The fully equipped kitchen includes a fridge/freezer, stove, oven, microwave, dishwasher, sandwich maker, and air fryer. Hydronic heating runs throughout the apartment, and a dedicated drying room means you're always ready for the next day on the mountain.</p>
+            <p><strong>Bedroom 1</strong> (downstairs) has a comfortable Queen bed. <strong>Bedroom 2</strong> (downstairs) features two tri-bunks — each with a double on the bottom and a single on top — sleeping up to 6 in this room alone. Combined, the apartment sleeps up to 8 guests across two bathrooms. Step out onto the private balcony for sweeping alpine views, with resort parking just a short walk away.</p>
+          </div>
+
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:#1a1a2e;margin-bottom:16px;">Key Features</h3>
+          <div class="key-features">
+            <div class="feature-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+              <span class="feature-value">2</span>
+              <span class="feature-label">Bedrooms</span>
+            </div>
+            <div class="feature-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 0 1 1 1v3H3v-3a1 1 0 0 1 1-1z"/><path d="M3 16v4"/><path d="M21 16v4"/><path d="M6 12V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/></svg>
+              <span class="feature-value">2</span>
+              <span class="feature-label">Bathrooms</span>
+            </div>
+            <div class="feature-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span class="feature-value">8</span>
+              <span class="feature-label">Max Guests</span>
+            </div>
+            <div class="feature-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 3v18"/></svg>
+              <span class="feature-value">120m&sup2;</span>
+              <span class="feature-label">Property Size</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Amenities Tab -->
+        <div class="tab-content" id="tab-amenities">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:#1a1a2e;margin-bottom:20px;">What this place offers</h3>
+          <div class="amenities-grid">
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Ski-in / Ski-out Access
+            </div>
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+              Fully Equipped Kitchen
+            </div>
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 L3 9 L3 21 L9 21 L9 14 L15 14 L15 21 L21 21 L21 9 Z"/><path d="M3 9 Q12 2 21 9"/></svg>
+              Gas Log Fire
+            </div>
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+              Mountain Views
+            </div>
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+              Flat-screen TV
+            </div>
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><line x1="12" y1="16" x2="12" y2="16.01"/></svg>
+              Ski &amp; Board Storage
+            </div>
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Private Balcony
+            </div>
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Hydronic Heating
+            </div>
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              Resort Parking Nearby
+            </div>
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 3v18"/></svg>
+              Dishwasher
+            </div>
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              Drying Room
+            </div>
+            <div class="amenity-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Microwave &amp; Air Fryer
+            </div>
+          </div>
+        </div>
+
+        <!-- Rates Tab -->
+        <div class="tab-content" id="tab-rates">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:#1a1a2e;margin-bottom:20px;">Seasonal Pricing</h3>
+          <div class="rates-grid">
+            <div class="rate-card winter">
+              <div class="rate-season">Winter Season</div>
+              <div class="rate-dates">Jun - Aug (Ski Season)</div>
+              <div class="rate-price">$385 <span>/ night</span></div>
+              <div class="rate-note">Minimum 2 nights</div>
+            </div>
+            <div class="rate-card featured">
+              <div class="rate-season">Standard Season</div>
+              <div class="rate-dates">Mar - May &amp; Sep - Nov</div>
+              <div class="rate-price">$285 <span>/ night</span></div>
+              <div class="rate-note">Minimum 1 night</div>
+            </div>
+            <div class="rate-card">
+              <div class="rate-season">Off-Peak</div>
+              <div class="rate-dates">Dec - Feb</div>
+              <div class="rate-price">$220 <span>/ night</span></div>
+              <div class="rate-note">Minimum 1 night</div>
+            </div>
+          </div>
+          <p class="rates-footnote">* Rates shown are for the entire apartment (up to 8 guests). Cleaning fee of $150 applies per stay. Weekend and public holiday surcharges may apply. All rates in AUD.</p>
+        </div>
+
+        <!-- Reviews Tab -->
+        <div class="tab-content" id="tab-reviews">
+          <div class="reviews-summary">
+            <div class="reviews-score">
+              <div class="score">4.8</div>
+              <div class="label">out of 5</div>
+            </div>
+            <div class="reviews-bars">
+              <div class="review-bar-row">
+                <span class="bar-label">Cleanliness</span>
+                <div class="review-bar"><div class="review-bar-fill" style="width:96%"></div></div>
+              </div>
+              <div class="review-bar-row">
+                <span class="bar-label">Location</span>
+                <div class="review-bar"><div class="review-bar-fill" style="width:98%"></div></div>
+              </div>
+              <div class="review-bar-row">
+                <span class="bar-label">Value</span>
+                <div class="review-bar"><div class="review-bar-fill" style="width:88%"></div></div>
+              </div>
+              <div class="review-bar-row">
+                <span class="bar-label">Service</span>
+                <div class="review-bar"><div class="review-bar-fill" style="width:95%"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Review 1 -->
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar" style="background:linear-gradient(135deg,#1a73a7,#2196F3);">SM</div>
+              <div class="review-author-info">
+                <div class="review-author">Sarah Mitchell</div>
+                <div class="review-date">January 2026</div>
+              </div>
+              <div class="review-stars">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+            </div>
+            <p class="review-text">Absolutely perfect for our family ski trip. The ski-in/ski-out access is unbeatable — we were on the slopes in minutes from the front door. The gas log fire and the spacious living area made evenings genuinely magical. The tri-bunks in the second bedroom were ideal for the kids. Apartment is spotless and well-equipped. Can't wait to go back!</p>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar" style="background:linear-gradient(135deg,#e67e22,#f39c12);">JO</div>
+              <div class="review-author-info">
+                <div class="review-author">James O'Brien</div>
+                <div class="review-date">December 2025</div>
+              </div>
+              <div class="review-stars">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" opacity="0.3"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+            </div>
+            <p class="review-text">Great base for a mountain getaway. Easy access to the slopes and a short walk to the village cafes. The apartment was spotless and the beds very comfortable. The hydronic heating kept the whole place warm overnight. The balcony views in the morning were spectacular. Minor note — worth bringing your own firewood kindling — but honestly a brilliant place and we'll be back.</p>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar" style="background:linear-gradient(135deg,#2d6a4f,#40916c);">EW</div>
+              <div class="review-author-info">
+                <div class="review-author">Emma Walsh</div>
+                <div class="review-date">November 2025</div>
+              </div>
+              <div class="review-stars">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+            </div>
+            <p class="review-text">Stayed here for a November long weekend and it was absolutely magical. The mountain views from the balcony were stunning. Six of us stayed very comfortably across the two bedrooms. Having a fully equipped kitchen was so convenient — we cooked most meals in. The drying room after a rainy hike was a lifesaver. Immaculate presentation. Highly recommend for families and friend groups!</p>
+          </div>
+        </div>
+
+        <!-- Location Tab -->
+        <div class="tab-content" id="tab-location">
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:#1a1a2e;margin-bottom:20px;">Where you'll be</h3>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5778.687445151124!2d146.2617551095409!3d-37.840356671917135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b28f9bb256c424b%3A0x5315d9cd132fa4b8!2sCascade%20Apartments!5e0!3m2!1sen!2sau!4v1771751504197!5m2!1sen!2sau"
+            width="100%" height="450"
+            style="border:0;border-radius:12px;display:block;margin-bottom:24px;"
+            allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Map showing Cascade Apartments, Baw Baw Village, Mt Baw Baw VIC"></iframe>
+          <div class="location-details">
+            <div class="location-detail-card">
+              <h4>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Address
+              </h4>
+              <p>Cascade Apartment 3<br>Baw Baw Village<br>Mt Baw Baw, VIC 3833<br>Australia</p>
+            </div>
+            <div class="location-detail-card">
+              <h4>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Getting There
+              </h4>
+              <ul>
+                <li><span>Melbourne CBD</span><span>~170 km</span></li>
+                <li><span>Warragul</span><span>~77 km</span></li>
+                <li><span>Drouin</span><span>~70 km</span></li>
+                <li><span>Baw Baw Village</span><span>On-site</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Sidebar -->
+      <aside class="booking-sidebar">
+        <div class="booking-price-header">
+          <span class="price" id="pSidebarNightly">$285</span>
+          <span class="per-night">/ night</span>
+        </div>
+
+        <div class="booking-form">
+          <div class="booking-form-row">
+            <div class="booking-form-field">
+              <label for="checkin">Check-in</label>
+              <input type="date" id="checkin">
+            </div>
+            <div class="booking-form-field">
+              <label for="checkout">Check-out</label>
+              <input type="date" id="checkout">
+            </div>
+          </div>
+          <div class="booking-form-field" style="border-top:1px solid #ddd;">
+            <label for="guests">Guests</label>
+            <select id="guests">
+              <option value="1">1 Guest</option>
+              <option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+              <option value="5">5 Guests</option>
+              <option value="6">6 Guests</option>
+              <option value="7">7 Guests</option>
+              <option value="8">8 Guests</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn-book">Book Now</button>
+        <p class="booking-note">You won't be charged yet</p>
+
+        <div class="price-breakdown">
+          <div class="price-row">
+            <span class="label" id="pSidebarRate" title="Nightly rate multiplied by number of nights">—</span>
+            <span id="pSidebarAccom">—</span>
+          </div>
+          <div class="price-row">
+            <span class="label" title="One-time cleaning fee">Cleaning fee</span>
+            <span id="pSidebarCleaning">$150</span>
+          </div>
+          <div class="price-row">
+            <span class="label" title="Service charge for booking platform">Service fee</span>
+            <span id="pSidebarService">—</span>
+          </div>
+          <div class="price-row">
+            <span class="label" title="Local accommodation levy">Taxes &amp; levies</span>
+            <span id="pSidebarTax">—</span>
+          </div>
+          <div class="price-row total">
+            <span>Total</span>
+            <span id="pSidebarTotal">—</span>
+          </div>
+        </div>
+
+        <div class="cancellation-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          <span><strong>Free cancellation</strong> up to 48 hours before check-in. After that, the first night is non-refundable.</span>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 36 L15 9 L27 36Z" fill="currentColor" fill-opacity="0.42"/>
+              <path d="M17 36 L30 3 L43 36Z" fill="currentColor"/>
+              <path d="M30 3 L36.5 17 L23.5 17Z" fill="currentColor" fill-opacity="0.22"/>
+              <path d="M1 40 Q5.5 37.2 10 40 Q14.5 42.8 19 40 Q23.5 37.2 28 40 Q32.5 42.8 37 40 Q39.5 38.5 43 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+            </svg>
+            <span class="logo-wordmark">
+              <span class="logo-wordmark-main">Cascade</span>
+              <span class="logo-wordmark-sub">Apartment 3</span>
+            </span>
+          </a>
+          <p>A premium alpine apartment at Baw Baw Village, Mt Baw Baw. Ski-in/ski-out access, stunning mountain views, and everything you need for an unforgettable alpine escape.</p>
+        </div>
+        <div>
+          <h4 class="footer-heading">The Apartment</h4>
+          <div class="footer-links">
+            <a href="#tab-overview" onclick="document.querySelector('[data-tab=overview]').click();window.scrollTo({top:document.querySelector('.property-tabs').offsetTop-80,behavior:'smooth'});return false;">Overview</a>
+            <a href="#tab-amenities" onclick="document.querySelector('[data-tab=amenities]').click();window.scrollTo({top:document.querySelector('.property-tabs').offsetTop-80,behavior:'smooth'});return false;">Amenities</a>
+            <a href="search.html">Photo Gallery</a>
+            <a href="#tab-rates" onclick="document.querySelector('[data-tab=rates]').click();window.scrollTo({top:document.querySelector('.property-tabs').offsetTop-80,behavior:'smooth'});return false;">Rates</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Property</h4>
+          <div class="footer-links">
+            <a href="#tab-overview" onclick="document.querySelector('[data-tab=overview]').click();window.scrollTo({top:document.querySelector('.property-tabs').offsetTop-80,behavior:'smooth'});return false;">About</a>
+            <a href="#tab-amenities" onclick="document.querySelector('[data-tab=amenities]').click();window.scrollTo({top:document.querySelector('.property-tabs').offsetTop-80,behavior:'smooth'});return false;">Amenities</a>
+            <a href="#tab-rates" onclick="document.querySelector('[data-tab=rates]').click();window.scrollTo({top:document.querySelector('.property-tabs').offsetTop-80,behavior:'smooth'});return false;">Rates &amp; Pricing</a>
+            <a href="#tab-reviews" onclick="document.querySelector('[data-tab=reviews]').click();window.scrollTo({top:document.querySelector('.property-tabs').offsetTop-80,behavior:'smooth'});return false;">Reviews</a>
+            <a href="#tab-location" onclick="document.querySelector('[data-tab=location]').click();window.scrollTo({top:document.querySelector('.property-tabs').offsetTop-80,behavior:'smooth'});return false;">Location</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Support</h4>
+          <div class="footer-links">
+            <a href="booking.html">Book Now</a>
+            <a href="#tab-rates" onclick="document.querySelector('[data-tab=rates]').click();window.scrollTo({top:document.querySelector('.property-tabs').offsetTop-80,behavior:'smooth'});return false;">Cancellation Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="admin/index.html">Property Owners</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Cascade Apartment 3. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close gallery">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous photo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="lightbox-next" id="lightboxNext" aria-label="Next photo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lightbox-img-wrap">
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    </div>
+    <div class="lightbox-counter" id="lightboxCounter">1 / 10</div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    // ── Tab switching ──────────────────────────────────────────────
+    function activateTab(tabName) {
+      document.querySelectorAll('.property-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      var tab = document.querySelector('.property-tab[data-tab="' + tabName + '"]');
+      var content = document.getElementById('tab-' + tabName);
+      if (tab)     tab.classList.add('active');
+      if (content) content.classList.add('active');
+    }
+
+    document.querySelectorAll('.property-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() { activateTab(tab.getAttribute('data-tab')); });
+    });
+
+    // Open tab from URL hash (e.g. property.html#tab-rates)
+    (function() {
+      var hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(hash)) {
+        activateTab(hash.replace('tab-', ''));
+        setTimeout(function() {
+          var tabs = document.querySelector('.property-tabs');
+          if (tabs) tabs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    })();
+
+    // ── Seasonal rate helper ───────────────────────────────────────
+    function getRate(dateStr) {
+      var m = new Date(dateStr + 'T00:00:00').getMonth() + 1; // 1-12
+      if (m >= 6 && m <= 8) return 385;                        // Winter / Ski
+      if ((m >= 3 && m <= 5) || (m >= 9 && m <= 11)) return 285; // Standard
+      return 220;                                               // Off-peak
+    }
+
+    function fmt(n) { return '$' + n.toLocaleString('en-AU'); }
+
+    // ── Price sidebar update ───────────────────────────────────────
+    function updateSidebar() {
+      var ci = document.getElementById('checkin').value;
+      var co = document.getElementById('checkout').value;
+
+      if (!ci || !co) return;
+      var nights = Math.round((new Date(co + 'T00:00:00') - new Date(ci + 'T00:00:00')) / 86400000);
+      if (nights <= 0) return;
+
+      var rate     = getRate(ci);
+      var accom    = rate * nights;
+      var cleaning = 150;
+      var service  = Math.round(accom * 0.05);
+      var taxable  = accom + cleaning + service;
+      var tax      = Math.round(taxable * 0.10);
+      var total    = taxable + tax;
+
+      document.getElementById('pSidebarNightly').textContent = fmt(rate);
+      document.getElementById('pSidebarRate').textContent    = fmt(rate) + ' \u00d7 ' + nights + ' night' + (nights !== 1 ? 's' : '');
+      document.getElementById('pSidebarAccom').textContent   = fmt(accom);
+      document.getElementById('pSidebarService').textContent = fmt(service);
+      document.getElementById('pSidebarTax').textContent     = fmt(tax);
+      document.getElementById('pSidebarTotal').textContent   = fmt(total);
+    }
+
+    // ── Set min dates & wire change events ────────────────────────
+    (function() {
+      var ciEl = document.getElementById('checkin');
+      var coEl = document.getElementById('checkout');
+      var today = new Date().toISOString().split('T')[0];
+
+      if (ciEl) {
+        ciEl.min = today;
+        ciEl.addEventListener('change', function() {
+          if (coEl) {
+            var next = new Date(this.value + 'T00:00:00');
+            next.setDate(next.getDate() + 1);
+            coEl.min = next.toISOString().split('T')[0];
+            if (coEl.value && coEl.value <= this.value) coEl.value = '';
+          }
+          updateSidebar();
+        });
+      }
+      if (coEl) {
+        var tom = new Date(); tom.setDate(tom.getDate() + 1);
+        coEl.min = tom.toISOString().split('T')[0];
+        coEl.addEventListener('change', updateSidebar);
+      }
+
+      document.getElementById('guests') && document.getElementById('guests').addEventListener('change', updateSidebar);
+
+      // Run on load with the default dates already in the inputs
+      updateSidebar();
+    })();
+
+    // ── Book Now button ────────────────────────────────────────────
+    document.querySelector('.btn-book').addEventListener('click', function() {
+      var ci     = document.getElementById('checkin').value;
+      var co     = document.getElementById('checkout').value;
+      var guests = document.getElementById('guests').value || '2';
+      var url    = 'booking.html';
+      var p      = [];
+      if (ci) p.push('checkin=' + ci);
+      if (co) p.push('checkout=' + co);
+      p.push('guests=' + guests);
+      window.location.href = url + (p.length ? '?' + p.join('&') : '');
+    });
+
+    // Lightbox
+    const lightboxImages = [
+      { src: 'images/20240425_111536.jpg', alt: 'Cascade Apartment 3' },
+      { src: 'images/20240515_094048.jpg', alt: 'Cascade Apartment 3 interior' },
+      { src: 'images/20220423_171724.jpg', alt: 'Cascade Apartment 3 living area' },
+      { src: 'images/20220224_110708.jpg', alt: 'Cascade Apartment 3 bedroom' },
+      { src: 'images/20230218_132555.jpg', alt: 'Cascade Apartment 3 views' },
+      { src: 'images/20240515_093427.jpg', alt: 'Cascade Apartment 3 deck' },
+      { src: 'images/20240331_085622.jpg', alt: 'Cascade Apartment 3 mountain' },
+      { src: 'images/20220423_171813.jpg', alt: 'Cascade Apartment 3 exterior' },
+      { src: 'images/20220423_172833.jpg', alt: 'Cascade Apartment 3 kitchen' },
+      { src: 'images/cascade.webp', alt: 'Cascade Apartment 3 aerial' }
+    ];
+    let lbIndex = 0;
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    const lbCounter = document.getElementById('lightboxCounter');
+
+    function lbShow(index) {
+      lbIndex = (index + lightboxImages.length) % lightboxImages.length;
+      lbImg.src = lightboxImages[lbIndex].src;
+      lbImg.alt = lightboxImages[lbIndex].alt;
+      lbCounter.textContent = (lbIndex + 1) + ' / ' + lightboxImages.length;
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function lbClose() {
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', lbClose);
+    document.getElementById('lightboxPrev').addEventListener('click', () => lbShow(lbIndex - 1));
+    document.getElementById('lightboxNext').addEventListener('click', () => lbShow(lbIndex + 1));
+    lb.addEventListener('click', e => { if (e.target === lb) lbClose(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('active')) return;
+      if (e.key === 'Escape') lbClose();
+      if (e.key === 'ArrowLeft') lbShow(lbIndex - 1);
+      if (e.key === 'ArrowRight') lbShow(lbIndex + 1);
+    });
+
+    // Wire gallery images to lightbox
+    document.querySelectorAll('.gallery-item img').forEach((img, i) => {
+      img.addEventListener('click', () => lbShow(i));
+    });
+
+    // "Show all photos" button opens lightbox at image 0
+    const galleryBtn = document.querySelector('.gallery-btn');
+    if (galleryBtn) {
+      galleryBtn.addEventListener('click', e => { e.stopPropagation(); lbShow(0); });
+    }
+  </script>
+</body>
+</html>
