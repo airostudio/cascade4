@@ -103,8 +103,8 @@
     }
     .property-type-badge {
       display: inline-block;
-      background: #e8f4fd;
-      color: #1a73a7;
+      background: rgba(15,39,68,0.08);
+      color: var(--color-primary);
       padding: 4px 12px;
       border-radius: 20px;
       font-size: 0.8rem;
@@ -129,8 +129,8 @@
       transition: all 0.2s;
     }
     .property-actions .btn-icon:hover {
-      border-color: #1a73a7;
-      color: #1a73a7;
+      border-color: var(--color-primary);
+      color: var(--color-primary);
     }
     .property-actions .btn-icon svg {
       width: 20px;
@@ -170,7 +170,7 @@
     }
     .property-tab:hover { color: #1a1a2e; }
     .property-tab.active {
-      color: #1a73a7;
+      color: var(--color-primary);
     }
     .property-tab.active::after {
       content: '';
@@ -179,7 +179,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: #1a73a7;
+      background: var(--color-secondary);
       border-radius: 2px 2px 0 0;
     }
 
@@ -214,7 +214,7 @@
     .feature-card svg {
       width: 32px;
       height: 32px;
-      color: #1a73a7;
+      color: var(--color-secondary);
       margin-bottom: 8px;
     }
     .feature-card .feature-value {
@@ -249,11 +249,11 @@
       color: #333;
       transition: background 0.2s;
     }
-    .amenity-item:hover { background: #e8f4fd; }
+    .amenity-item:hover { background: var(--color-cream); }
     .amenity-item svg {
       width: 24px;
       height: 24px;
-      color: #1a73a7;
+      color: var(--color-primary);
       flex-shrink: 0;
     }
 
@@ -273,12 +273,12 @@
       position: relative;
     }
     .rate-card:hover {
-      border-color: #1a73a7;
-      box-shadow: 0 4px 20px rgba(26,115,167,0.12);
+      border-color: var(--color-primary);
+      box-shadow: 0 4px 20px rgba(15,39,68,0.12);
     }
     .rate-card.featured {
-      border-color: #1a73a7;
-      background: linear-gradient(to bottom, #e8f4fd, #fff);
+      border-color: var(--color-gold);
+      background: linear-gradient(to bottom, #fdf8ec, #fff);
     }
     .rate-card.featured::before {
       content: 'Best Value';
@@ -286,12 +286,12 @@
       top: -12px;
       left: 50%;
       transform: translateX(-50%);
-      background: #1a73a7;
-      color: #fff;
+      background: var(--color-gold);
+      color: var(--color-primary-dark);
       padding: 4px 16px;
       border-radius: 20px;
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -349,7 +349,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
       font-weight: 700;
-      color: #1a73a7;
+      color: var(--color-gold);
       line-height: 1;
     }
     .reviews-score .label {
@@ -430,12 +430,12 @@
     .location-map-placeholder {
       width: 100%;
       height: 350px;
-      background: linear-gradient(135deg, #e8f4fd, #d1ecf9);
+      background: linear-gradient(135deg, var(--color-cream), var(--color-light));
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #1a73a7;
+      color: var(--color-primary);
       font-size: 1rem;
       margin-bottom: 24px;
       position: relative;
@@ -446,10 +446,10 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, transparent 49%, #c0dff0 49%, #c0dff0 51%, transparent 51%),
-        linear-gradient(0deg, transparent 49%, #c0dff0 49%, #c0dff0 51%, transparent 51%);
+        linear-gradient(90deg, transparent 49%, var(--color-muted) 49%, var(--color-muted) 51%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, var(--color-muted) 49%, var(--color-muted) 51%, transparent 51%);
       background-size: 40px 40px;
-      opacity: 0.5;
+      opacity: 0.3;
     }
     .location-map-placeholder .map-pin {
       position: relative;
@@ -486,7 +486,7 @@
     .location-detail-card h4 svg {
       width: 18px;
       height: 18px;
-      color: #1a73a7;
+      color: var(--color-primary);
     }
     .location-detail-card p,
     .location-detail-card li {
@@ -573,7 +573,7 @@
     .btn-book {
       width: 100%;
       padding: 16px;
-      background: linear-gradient(135deg, #1a73a7, #2196F3);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
       color: #fff;
       border: none;
       border-radius: 12px;
@@ -583,11 +583,12 @@
       cursor: pointer;
       transition: all 0.3s;
       margin-bottom: 16px;
+      letter-spacing: 0.02em;
     }
     .btn-book:hover {
-      background: linear-gradient(135deg, #155d87, #1976D2);
+      background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(26,115,167,0.35);
+      box-shadow: 0 4px 16px rgba(15,39,68,0.35);
     }
     .booking-note {
       text-align: center;
@@ -1110,7 +1111,7 @@
           <!-- Review 1 -->
           <div class="review-card">
             <div class="review-header">
-              <div class="review-avatar" style="background:linear-gradient(135deg,#1a73a7,#2196F3);">SM</div>
+              <div class="review-avatar" style="background:linear-gradient(135deg,#0f2744,#1a3a5c);">SM</div>
               <div class="review-author-info">
                 <div class="review-author">Sarah Mitchell</div>
                 <div class="review-date">January 2026</div>

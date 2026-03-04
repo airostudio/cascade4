@@ -306,6 +306,34 @@
       .hero-book-field:last-of-type { border-bottom: none; }
     }
 
+    /* ── Hero Dots ───────────────────────────────────────────── */
+    .hero-dots {
+      position: absolute;
+      bottom: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 3;
+    }
+    .hero-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.45);
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .hero-dot.active {
+      background: #fff;
+      transform: scale(1.35);
+    }
+    @media (max-width: 600px) {
+      .hero-dots { bottom: 260px; }
+    }
+
     /* ── Contact Section ─────────────────────────────────────── */
     .contact-grid {
       display: grid;
@@ -448,6 +476,12 @@
         <img src="images/IMG_4515.jpg" alt="Cascade Apartment 4 mountain views" style="width:100%;height:100%;object-fit:cover;">
       </div>
     </div>
+    <div class="hero-dots" id="heroDots">
+      <button class="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
+      <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
+      <button class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
+      <button class="hero-dot" data-slide="3" aria-label="Slide 4"></button>
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-title">Cascade Apartment 4</h1>
@@ -496,7 +530,7 @@
     <div class="container">
       <div class="about-layout">
         <div>
-          <img src="images/20230218_132555.jpg" alt="Cascade Apartment 4 — living area" loading="lazy">
+          <img src="images/IMG_4461.jpg" alt="Cascade Apartment 4 — living area" loading="lazy">
         </div>
         <div class="about-text">
           <h2>Your Alpine Base at Mt Baw Baw</h2>
@@ -521,7 +555,7 @@
       </div>
       <div class="season-cards">
         <div class="season-card season-card--winter">
-          <img src="images/cascade.webp" alt="Mt Baw Baw winter ski season" class="season-card-bg" loading="lazy">
+          <img src="images/IMG_4515.jpg" alt="Mt Baw Baw winter ski season" class="season-card-bg" loading="lazy">
           <div class="season-card-overlay"></div>
           <div class="season-card-content">
             <span class="season-card-tag">Jun – Aug</span>
@@ -531,7 +565,7 @@
           </div>
         </div>
         <div class="season-card season-card--summer">
-          <img src="images/20240331_085622.jpg" alt="Mt Baw Baw summer alpine" class="season-card-bg" loading="lazy">
+          <img src="images/IMG_4495.jpg" alt="Mt Baw Baw summer alpine" class="season-card-bg" loading="lazy">
           <div class="season-card-overlay"></div>
           <div class="season-card-content">
             <span class="season-card-tag">Sep – May</span>
@@ -556,13 +590,13 @@
       </div>
       <div class="gallery-preview">
         <div class="gallery-preview-item">
-          <img src="images/20240425_111536.jpg" alt="Cascade Apartment 4" loading="lazy">
+          <img src="images/IMG_4520.jpg" alt="Cascade Apartment 4" loading="lazy">
         </div>
         <div class="gallery-preview-item">
-          <img src="images/20240515_094048.jpg" alt="Cascade Apartment 4 interior" loading="lazy">
+          <img src="images/IMG_4514.jpg" alt="Cascade Apartment 4 interior" loading="lazy">
         </div>
         <div class="gallery-preview-item">
-          <img src="images/20220224_110708.jpg" alt="Cascade Apartment 4 bedroom" loading="lazy">
+          <img src="images/IMG_4522.jpg" alt="Cascade Apartment 4 bedroom" loading="lazy">
         </div>
       </div>
     </div>
