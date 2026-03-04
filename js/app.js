@@ -1,5 +1,5 @@
 /**
- * Cascade Apartment 3 - Main Application JavaScript
+ * Cascade Apartment 4 - Main Application JavaScript
  * Handles: Navigation, hero slideshow, parallax, scroll animations,
  * mobile menu, tabs, modals, toasts, and general UI interactions
  */

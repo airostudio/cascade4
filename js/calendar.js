@@ -1,5 +1,5 @@
 /**
- * Cascade Apartment 3 - Calendar Widget
+ * Cascade Apartment 4 - Calendar Widget
  * Handles: Availability calendar rendering, date range selection,
  * booking visualization, and admin calendar management
  */

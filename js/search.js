@@ -1,5 +1,5 @@
 /**
- * Cascade Apartment 3 - Search & Filter
+ * Cascade Apartment 4 - Search & Filter
  * Handles: Property search, filtering, sorting, and results display
  */
 

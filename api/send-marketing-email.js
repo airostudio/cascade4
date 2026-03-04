@@ -39,7 +39,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Maximum 200 recipients per send' });
   }
 
-  const from = EMAIL_FROM || 'Cascade Apartment 3 <onboarding@resend.dev>';
+  const from = EMAIL_FROM || 'Cascade Apartment 4 <onboarding@resend.dev>';
   const results = { sent: 0, failed: 0, errors: [] };
 
   for (const recipient of recipients) {

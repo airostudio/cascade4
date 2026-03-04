@@ -48,7 +48,7 @@ export default async function handler(req, res) {
       'automatic_payment_methods[enabled]':        'true',
       'automatic_payment_methods[allow_redirects]': 'never',
       'metadata[booking_id]':                      bookingId || '',
-      'metadata[property]':                        'Cascade Apartment 3',
+      'metadata[property]':                        'Cascade Apartment 4',
       'metadata[checkin]':                         checkin  || '',
       'metadata[checkout]':                        checkout || '',
       'metadata[guests]':                          String(guests || ''),

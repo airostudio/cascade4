@@ -1,5 +1,5 @@
 /**
- * Cascade Apartment 3 - Shared Data Layer
+ * Cascade Apartment 4 - Shared Data Layer
  * Provides localStorage persistence for bookings, blocked dates,
  * iCal connections, and settings across all admin pages.
  */

@@ -1,5 +1,5 @@
 /**
- * Cascade Apartment 3 - iCal Sync
+ * Cascade Apartment 4 - iCal Sync
  * Handles: iCal feed import/export for Booking.com, Airbnb, VRBO,
  * Google Calendar, and other iCal-compatible services
  *
@@ -47,7 +47,7 @@
      * Generate an iCal export URL for a property
      */
     getExportUrl(propertyId) {
-      const baseUrl = window.location.origin || 'https://mtbawbawcascade3.com';
+      const baseUrl = window.location.origin || 'https://mtbawbawcascade4.com';
       return `${baseUrl}/ical/export/${propertyId}.ics`;
     },
 
@@ -61,10 +61,10 @@
       let ical = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
-        'PRODID:-//Cascade Apartment 3//Booking Calendar//EN',
+        'PRODID:-//Cascade Apartment 4//Booking Calendar//EN',
         'CALSCALE:GREGORIAN',
         'METHOD:PUBLISH',
-        `X-WR-CALNAME:${propertyName} - Cascade Apartment 3`,
+        `X-WR-CALNAME:${propertyName} - Cascade Apartment 4`,
         `X-WR-TIMEZONE:Australia/Sydney`,
       ];
 
@@ -77,7 +77,7 @@
           `DTSTART;VALUE=DATE:${this.formatICalDateOnly(checkin)}`,
           `DTEND;VALUE=DATE:${this.formatICalDateOnly(checkout)}`,
           `DTSTAMP:${timestamp}`,
-          `UID:${booking.id}@mtbawbawcascade3.com`,
+          `UID:${booking.id}@mtbawbawcascade4.com`,
           `SUMMARY:${booking.status === 'blocked' ? 'Blocked' : booking.guestName || 'Reserved'}`,
           `DESCRIPTION:Booking ref: ${booking.reference || 'N/A'}`,
           `STATUS:CONFIRMED`,

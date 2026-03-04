@@ -7,8 +7,8 @@
  *
  * Required environment variables (set in Vercel dashboard):
  *   RESEND_API_KEY   — your Resend API key
- *   EMAIL_FROM       — verified sender address (e.g. hello@mtbawbawcascade3.com)
- *   ADMIN_EMAIL      — where admin alerts go  (e.g. hello@mtbawbawcascade3.com)
+ *   EMAIL_FROM       — verified sender address (e.g. hello@mtbawbawcascade4.com)
+ *   ADMIN_EMAIL      — where admin alerts go  (e.g. hello@mtbawbawcascade4.com)
  *
  * For local testing set these in .env.local and run: vercel dev
  */
@@ -54,7 +54,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'guestEmail is required' });
   }
 
-  const fromAddress = EMAIL_FROM || 'Cascade Apartment 3 <onboarding@resend.dev>';
+  const fromAddress = EMAIL_FROM || 'Cascade Apartment 4 <onboarding@resend.dev>';
   const adminAddress = ADMIN_EMAIL || fromAddress;
 
   const checkinFormatted  = formatDate(checkin);
@@ -104,7 +104,7 @@ export default async function handler(req, res) {
 <body>
 <div class="wrap">
   <div class="header">
-    <div class="header-logo">Cascade Apartment 3</div>
+    <div class="header-logo">Cascade Apartment 4</div>
     <div class="header-sub">Mt Baw Baw Alpine Retreat</div>
   </div>
   <div class="hero">
@@ -118,13 +118,13 @@ export default async function handler(req, res) {
   </div>
   <div class="body">
     <p class="greeting">Hi ${escHtml(guestName)},<br>
-    Great news — your stay at Cascade Apartment 3 is confirmed. We can't wait to welcome you to Mt Baw Baw!</p>
+    Great news — your stay at Cascade Apartment 4 is confirmed. We can't wait to welcome you to Mt Baw Baw!</p>
 
     <div class="detail-card">
       <h2>Booking Summary</h2>
       <div class="detail-row">
         <span class="detail-label">Property</span>
-        <span class="detail-value">Cascade Apartment 3</span>
+        <span class="detail-value">Cascade Apartment 4</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">Location</span>
@@ -160,7 +160,7 @@ export default async function handler(req, res) {
       <h3>Check-in Information</h3>
       A self-check-in code and detailed directions will be sent to you 3 days before your arrival.
       If you have any questions in the meantime, reply to this email or contact us at
-      <a href="mailto:hello@mtbawbawcascade3.com">hello@mtbawbawcascade3.com</a>.
+      <a href="mailto:hello@mtbawbawcascade4.com">hello@mtbawbawcascade4.com</a>.
     </div>
 
     <div class="info-box">
@@ -170,11 +170,11 @@ export default async function handler(req, res) {
     </div>
   </div>
   <div class="footer">
-    <p><strong>Cascade Apartment 3</strong><br>
+    <p><strong>Cascade Apartment 4</strong><br>
     Baw Baw Village, Mt Baw Baw VIC 3833<br>
-    <a href="mailto:hello@mtbawbawcascade3.com">hello@mtbawbawcascade3.com</a></p>
+    <a href="mailto:hello@mtbawbawcascade4.com">hello@mtbawbawcascade4.com</a></p>
     <p style="margin-top:16px; color:#9ca3af; font-size:12px;">
-      You're receiving this email because you made a booking at mtbawbawcascade3.com.
+      You're receiving this email because you made a booking at mtbawbawcascade4.com.
     </p>
   </div>
 </div>
@@ -215,7 +215,7 @@ export default async function handler(req, res) {
     ${nights ? `<div class="row"><span class="lbl">Nights</span><span class="val">${escHtml(String(nights))}</span></div>` : ''}
     ${guests ? `<div class="row"><span class="lbl">Guests</span><span class="val">${escHtml(String(guests))}</span></div>` : ''}
     ${totalAmount ? `<div class="row"><span class="lbl">Total</span><span class="val">${escHtml(String(totalAmount))}</span></div>` : ''}
-    <a class="cta" href="https://mtbawbawcascade3.com/admin/bookings.html">View in Admin →</a>
+    <a class="cta" href="https://mtbawbawcascade4.com/admin/bookings.html">View in Admin →</a>
   </div>
 </div>
 </body>
@@ -229,7 +229,7 @@ export default async function handler(req, res) {
         apiKey: RESEND_API_KEY,
         from: fromAddress,
         to: guestEmail,
-        subject: `Booking confirmed — ${ref} · Cascade Apartment 3`,
+        subject: `Booking confirmed — ${ref} · Cascade Apartment 4`,
         html: guestHtml,
       }),
       sendEmail({

@@ -2,18 +2,18 @@
  * Vercel Serverless Function — /api/contact
  *
  * Handles contact form submissions from the front page.
- * Sends an enquiry notification to hello@mtbawbawcascade3.com
+ * Sends an enquiry notification to hello@mtbawbawcascade4.com
  * and an auto-reply acknowledgement to the sender.
  *
  * Required environment variables (set in Vercel dashboard):
  *   RESEND_API_KEY   — your Resend API key
- *   EMAIL_FROM       — verified sender address (e.g. hello@mtbawbawcascade3.com)
+ *   EMAIL_FROM       — verified sender address (e.g. hello@mtbawbawcascade4.com)
  *
  * For local testing set these in .env.local and run: vercel dev
  */
 
 const RESEND_API   = 'https://api.resend.com/emails';
-const CONTACT_DEST = 'hello@mtbawbawcascade3.com';
+const CONTACT_DEST = 'hello@mtbawbawcascade4.com';
 
 export default async function handler(req, res) {
   // CORS preflight
@@ -58,7 +58,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid email address' });
   }
 
-  const fromAddress = EMAIL_FROM || 'Cascade Apartment 3 <onboarding@resend.dev>';
+  const fromAddress = EMAIL_FROM || 'Cascade Apartment 4 <onboarding@resend.dev>';
   const timestamp   = new Date().toLocaleString('en-AU', {
     timeZone: 'Australia/Melbourne',
     dateStyle: 'full', timeStyle: 'short',
@@ -96,7 +96,7 @@ export default async function handler(req, res) {
 <div class="wrap">
   <div class="header">
     New Enquiry — ${escHtml(subject)}
-    <div class="header-sub">Cascade Apartment 3 · Contact Form</div>
+    <div class="header-sub">Cascade Apartment 4 · Contact Form</div>
   </div>
   <div class="body">
     <div class="row"><span class="lbl">From</span><span class="val">${escHtml(name)}</span></div>
@@ -108,9 +108,9 @@ export default async function handler(req, res) {
       <div class="msg-label">Message</div>
       ${escHtml(message)}
     </div>
-    <a class="cta" href="mailto:${escHtml(email)}?subject=Re: ${encodeURIComponent(subject)} — Cascade Apartment 3">Reply to ${escHtml(name)} →</a>
+    <a class="cta" href="mailto:${escHtml(email)}?subject=Re: ${encodeURIComponent(subject)} — Cascade Apartment 4">Reply to ${escHtml(name)} →</a>
   </div>
-  <div class="footer">Sent via the contact form at mtbawbawcascade3.com</div>
+  <div class="footer">Sent via the contact form at mtbawbawcascade4.com</div>
 </div>
 </body>
 </html>`;
@@ -147,7 +147,7 @@ export default async function handler(req, res) {
 <body>
 <div class="wrap">
   <div class="header">
-    <div class="header-logo">Cascade Apartment 3</div>
+    <div class="header-logo">Cascade Apartment 4</div>
     <div class="header-sub">Mt Baw Baw Alpine Retreat</div>
   </div>
   <div class="body">
@@ -161,14 +161,14 @@ export default async function handler(req, res) {
     <div class="info-box">
       In the meantime, you can check availability and rates on our website, or browse the apartment details and gallery. We look forward to helping you plan your alpine escape!
     </div>
-    <p>Warm regards,<br><strong>The Cascade Apartment 3 Team</strong></p>
+    <p>Warm regards,<br><strong>The Cascade Apartment 4 Team</strong></p>
   </div>
   <div class="footer">
-    <p><strong>Cascade Apartment 3</strong><br>
+    <p><strong>Cascade Apartment 4</strong><br>
     Baw Baw Village, Mt Baw Baw VIC 3833<br>
-    <a href="mailto:hello@mtbawbawcascade3.com">hello@mtbawbawcascade3.com</a></p>
+    <a href="mailto:hello@mtbawbawcascade4.com">hello@mtbawbawcascade4.com</a></p>
     <p style="margin-top:12px; color:#9ca3af; font-size:12px;">
-      You're receiving this because you submitted a contact form at mtbawbawcascade3.com.
+      You're receiving this because you submitted a contact form at mtbawbawcascade4.com.
     </p>
   </div>
 </div>
@@ -191,7 +191,7 @@ export default async function handler(req, res) {
         apiKey:   RESEND_API_KEY,
         from:     fromAddress,
         to:       email,
-        subject:  `We received your message — Cascade Apartment 3`,
+        subject:  `We received your message — Cascade Apartment 4`,
         html:     replyHtml,
       }),
     ]);

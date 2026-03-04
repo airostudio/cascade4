@@ -1,5 +1,5 @@
 /**
- * Cascade Apartment 3 - Booking Engine
+ * Cascade Apartment 4 - Booking Engine
  * Handles: Price calculations, booking form validation, availability checks,
  * rate rules, seasonal pricing, and booking flow management
  */
@@ -293,7 +293,7 @@
       // Update nights
       // Nights detail line
       const nightsLineEl = summaryEl.querySelector('#summaryNightsLine');
-      if (nightsLineEl) nightsLineEl.textContent = `${pricing.nights} night${pricing.nights !== 1 ? 's' : ''} · Cascade Apartment 3`;
+      if (nightsLineEl) nightsLineEl.textContent = `${pricing.nights} night${pricing.nights !== 1 ? 's' : ''} · Cascade Apartment 4`;
 
       // Rate label (e.g. "$289 × 4 nights")
       const rateLabelEl = summaryEl.querySelector('[data-summary="rate-label"]');
