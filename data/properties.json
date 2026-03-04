@@ -2,12 +2,12 @@
   "properties": [
     {
       "id": "prop-006",
-      "name": "Cascade Apartment 6",
+      "name": "Cascade Apartment 4",
       "type": "apartment",
       "status": "active",
       "description": "Fully self-contained, solid-brick alpine apartment set over two levels in Baw Baw Village at Mt Baw Baw. Features ski-in/ski-out access, wood fireplace, hot tub, private deck with mountain views, and a fully equipped kitchen. Perfect for ski season and summer alpine retreats.",
       "location": {
-        "address": "Cascade Apartment 6, Baw Baw Village",
+        "address": "Cascade Apartment 4, Baw Baw Village",
         "city": "Mt Baw Baw",
         "state": "VIC",
         "postcode": "3833",
@@ -16,7 +16,7 @@
         "lng": 146.4676
       },
       "contact": {
-        "email": "hello@cascadeapartment6.com.au",
+        "email": "hello@cascadeapartment4.com.au",
         "phone": "+61 3 5165 1200"
       },
       "rooms": [
@@ -59,13 +59,13 @@
       "icalFeeds": [
         {
           "platform": "airbnb",
-          "url": "https://www.airbnb.com/calendar/ical/cascade6.ics",
+          "url": "https://www.airbnb.com/calendar/ical/cascade4.ics",
           "lastSync": "2026-02-19T08:30:00Z",
           "status": "active"
         },
         {
           "platform": "booking",
-          "url": "https://admin.booking.com/ical/export/cascade6",
+          "url": "https://admin.booking.com/ical/export/cascade4",
           "lastSync": "2026-02-19T08:15:00Z",
           "status": "active"
         }
