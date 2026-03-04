@@ -103,6 +103,33 @@ app.post('/upload/single', upload.single('file'), (req, res) => {
 });
 
 /* -------------------------------------------------------
+   GET /images  – list all uploaded images
+   Returns JSON: { success, images: [{ filename, url, size, modified }] }
+-------------------------------------------------------- */
+app.get('/images', (req, res) => {
+  fs.readdir(UPLOADS_DIR, (err, files) => {
+    if (err) {
+      return res.status(500).json({ success: false, error: 'Could not read uploads directory' });
+    }
+
+    const allowed = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
+    const images = files
+      .filter(f => allowed.includes(path.extname(f).toLowerCase()))
+      .map(f => {
+        const stat = fs.statSync(path.join(UPLOADS_DIR, f));
+        return {
+          filename: f,
+          url: `/uploads/${f}`,
+          size: stat.size,
+          modified: stat.mtime
+        };
+      });
+
+    res.json({ success: true, images });
+  });
+});
+
+/* -------------------------------------------------------
    DELETE /upload/:filename  – remove an uploaded file
 -------------------------------------------------------- */
 app.delete('/upload/:filename', (req, res) => {
