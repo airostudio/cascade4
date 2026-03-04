@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Gallery — Cascade Apartment 3</title>
+  <meta name="description" content="Browse photos of Cascade Apartment 3 — a stunning alpine retreat at Mt Baw Baw. See the interiors, views, and ski-in/ski-out access.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* Gallery Page */
+    .gallery-hero {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      padding: calc(80px + var(--space-3xl)) 0 var(--space-2xl);
+      text-align: center;
+      color: var(--color-white);
+    }
+
+    .gallery-hero h1 {
+      font-family: var(--font-heading);
+      font-size: var(--font-size-3xl);
+      margin-bottom: var(--space-sm);
+    }
+
+    .gallery-hero p {
+      color: rgba(255,255,255,0.72);
+      font-size: var(--font-size-md);
+    }
+
+    /* Masonry photo grid */
+    .photo-grid {
+      columns: 3;
+      column-gap: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .photo-grid { columns: 2; }
+    }
+
+    @media (max-width: 560px) {
+      .photo-grid { columns: 1; }
+    }
+
+    .photo-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .photo-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform 0.35s ease;
+    }
+
+    .photo-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .photo-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      transition: background 0.3s ease;
+      border-radius: var(--radius-md);
+    }
+
+    .photo-item:hover::after {
+      background: rgba(0,0,0,0.12);
+    }
+
+    /* CTA strip */
+    .gallery-cta {
+      background: var(--color-primary);
+      color: var(--color-white);
+      padding: var(--space-3xl) 0;
+      text-align: center;
+    }
+
+    .gallery-cta h2 {
+      font-family: var(--font-heading);
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--space-sm);
+    }
+
+    .gallery-cta p {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Lightbox */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.93);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-overlay.is-open {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 4px;
+      display: block;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.8;
+      z-index: 10001;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
+
+    .lightbox-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: #fff;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 10001;
+    }
+
+    .lightbox-btn:hover { background: rgba(255,255,255,0.28); }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+
+    .lightbox-counter {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.72);
+      font-size: 0.9rem;
+      z-index: 10001;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header site-header--transparent" id="siteHeader">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 36 L15 9 L27 36Z" fill="currentColor" fill-opacity="0.42"/>
+          <path d="M17 36 L30 3 L43 36Z" fill="currentColor"/>
+          <path d="M30 3 L36.5 17 L23.5 17Z" fill="currentColor" fill-opacity="0.22"/>
+          <path d="M1 40 Q5.5 37.2 10 40 Q14.5 42.8 19 40 Q23.5 37.2 28 40 Q32.5 42.8 37 40 Q39.5 38.5 43 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+        <span class="logo-wordmark">
+          <span class="logo-wordmark-main">Cascade</span>
+          <span class="logo-wordmark-sub">Apartment 3</span>
+        </span>
+      </a>
+      <nav class="nav-main">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="property.html" class="nav-link">The Apartment</a>
+        <a href="search.html" class="nav-link nav-link--active">Gallery</a>
+        <a href="property.html#rates" class="nav-link">Rates</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="booking.html" class="btn btn--sm btn--primary">Book Now</a>
+      </div>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="property.html" class="nav-link">The Apartment</a>
+    <a href="search.html" class="nav-link nav-link--active">Gallery</a>
+    <a href="property.html#rates" class="nav-link">Rates</a>
+    <a href="booking.html" class="btn btn--primary btn--block">Book Now</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="gallery-hero">
+    <div class="container">
+      <h1>Photo Gallery</h1>
+      <p>A glimpse inside Cascade Apartment 3 — alpine views, warm interiors, and ski-in/ski-out access</p>
+    </div>
+  </section>
+
+  <!-- Photo Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="photo-grid" id="photoGrid">
+        <div class="photo-item" data-index="0">
+          <img src="images/20240425_111536.jpg" alt="Cascade Apartment 3 — living area" loading="lazy">
+        </div>
+        <div class="photo-item" data-index="1">
+          <img src="images/20240515_094048.jpg" alt="Cascade Apartment 3 — interior" loading="lazy">
+        </div>
+        <div class="photo-item" data-index="2">
+          <img src="images/20220423_171724.jpg" alt="Cascade Apartment 3 — lounge" loading="lazy">
+        </div>
+        <div class="photo-item" data-index="3">
+          <img src="images/20220224_110708.jpg" alt="Cascade Apartment 3 — bedroom" loading="lazy">
+        </div>
+        <div class="photo-item" data-index="4">
+          <img src="images/20230218_132555.jpg" alt="Cascade Apartment 3 — mountain views" loading="lazy">
+        </div>
+        <div class="photo-item" data-index="5">
+          <img src="images/20240515_093427.jpg" alt="Cascade Apartment 3 — deck" loading="lazy">
+        </div>
+        <div class="photo-item" data-index="6">
+          <img src="images/20240331_085622.jpg" alt="Cascade Apartment 3 — ski slopes" loading="lazy">
+        </div>
+        <div class="photo-item" data-index="7">
+          <img src="images/20220423_171813.jpg" alt="Cascade Apartment 3 — exterior" loading="lazy">
+        </div>
+        <div class="photo-item" data-index="8">
+          <img src="images/20220423_172833.jpg" alt="Cascade Apartment 3 — kitchen" loading="lazy">
+        </div>
+        <div class="photo-item" data-index="9">
+          <img src="images/cascade.webp" alt="Cascade Apartment 3 — Mt Baw Baw aerial" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="gallery-cta">
+    <div class="container">
+      <h2>Like What You See?</h2>
+      <p>Cascade Apartment 3 is available year-round — snow season, summer hiking, and everything in between.</p>
+      <a href="booking.html" class="btn btn--lg" style="background:#c9a84c;color:#0f2744;font-weight:700;border:none;">Check Availability &amp; Book</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 36 L15 9 L27 36Z" fill="currentColor" fill-opacity="0.42"/>
+              <path d="M17 36 L30 3 L43 36Z" fill="currentColor"/>
+              <path d="M30 3 L36.5 17 L23.5 17Z" fill="currentColor" fill-opacity="0.22"/>
+              <path d="M1 40 Q5.5 37.2 10 40 Q14.5 42.8 19 40 Q23.5 37.2 28 40 Q32.5 42.8 37 40 Q39.5 38.5 43 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+            </svg>
+            <span class="logo-wordmark">
+              <span class="logo-wordmark-main">Cascade</span>
+              <span class="logo-wordmark-sub">Apartment 3</span>
+            </span>
+          </a>
+          <p>A premium alpine apartment at Baw Baw Village, Mt Baw Baw. Ski-in/ski-out access, stunning mountain views, and everything you need for an unforgettable alpine escape.</p>
+        </div>
+        <div>
+          <h4 class="footer-heading">The Apartment</h4>
+          <div class="footer-links">
+            <a href="property.html#overview">Overview</a>
+            <a href="property.html#amenities">Amenities</a>
+            <a href="property.html#rates">Rates</a>
+            <a href="search.html">Photo Gallery</a>
+            <a href="property.html#location">Location</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Booking</h4>
+          <div class="footer-links">
+            <a href="booking.html">Check Availability</a>
+            <a href="booking.html">Make a Booking</a>
+            <a href="booking.html#cancellation">Cancellation Policy</a>
+            <a href="booking.html#faq">FAQ</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Info</h4>
+          <div class="footer-links">
+            <a href="property.html#location">Getting There</a>
+            <a href="property.html#amenities">What's Included</a>
+            <a href="booking.html">Contact Us</a>
+            <a href="admin/index.html">Owner Login</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Cascade Apartment 3. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <button class="lightbox-btn lightbox-prev" id="lightboxPrev" aria-label="Previous photo">&#8249;</button>
+    <div class="lightbox-content">
+      <img src="" alt="" class="lightbox-img" id="lightboxImg">
+    </div>
+    <button class="lightbox-btn lightbox-next" id="lightboxNext" aria-label="Next photo">&#8250;</button>
+    <div class="lightbox-counter" id="lightboxCounter">1 / 10</div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    const lightboxImages = [
+      { src: 'images/20240425_111536.jpg', alt: 'Cascade Apartment 3 — living area' },
+      { src: 'images/20240515_094048.jpg', alt: 'Cascade Apartment 3 — interior' },
+      { src: 'images/20220423_171724.jpg', alt: 'Cascade Apartment 3 — lounge' },
+      { src: 'images/20220224_110708.jpg', alt: 'Cascade Apartment 3 — bedroom' },
+      { src: 'images/20230218_132555.jpg', alt: 'Cascade Apartment 3 — mountain views' },
+      { src: 'images/20240515_093427.jpg', alt: 'Cascade Apartment 3 — deck' },
+      { src: 'images/20240331_085622.jpg', alt: 'Cascade Apartment 3 — ski slopes' },
+      { src: 'images/20220423_171813.jpg', alt: 'Cascade Apartment 3 — exterior' },
+      { src: 'images/20220423_172833.jpg', alt: 'Cascade Apartment 3 — kitchen' },
+      { src: 'images/cascade.webp', alt: 'Cascade Apartment 3 — Mt Baw Baw aerial' }
+    ];
+
+    let currentIndex = 0;
+    const overlay = document.getElementById('lightboxOverlay');
+    const img = document.getElementById('lightboxImg');
+    const counter = document.getElementById('lightboxCounter');
+
+    function openLightbox(index) {
+      currentIndex = index;
+      showImage();
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function showImage() {
+      const item = lightboxImages[currentIndex];
+      img.src = item.src;
+      img.alt = item.alt;
+      counter.textContent = (currentIndex + 1) + ' / ' + lightboxImages.length;
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + lightboxImages.length) % lightboxImages.length;
+      showImage();
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % lightboxImages.length;
+      showImage();
+    }
+
+    document.getElementById('photoGrid').addEventListener('click', function(e) {
+      const item = e.target.closest('.photo-item');
+      if (item) openLightbox(parseInt(item.dataset.index, 10));
+    });
+
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev').addEventListener('click', prevImage);
+    document.getElementById('lightboxNext').addEventListener('click', nextImage);
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (!overlay.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    });
+  </script>
+</body>
+</html>
