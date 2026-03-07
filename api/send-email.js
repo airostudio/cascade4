@@ -7,8 +7,8 @@
  *
  * Required environment variables (set in Vercel dashboard):
  *   RESEND_API_KEY   — your Resend API key
- *   EMAIL_FROM       — verified sender address (e.g. cascadeskipartments@gmail.com)
- *   ADMIN_EMAIL      — where admin alerts go  (e.g. cascadeskipartments@gmail.com)
+ *   EMAIL_FROM       — verified sender address (e.g. cascadeskiapartments@gmail.com)
+ *   ADMIN_EMAIL      — where admin alerts go  (e.g. cascadeskiapartments@gmail.com)
  *
  * For local testing set these in .env.local and run: vercel dev
  */
@@ -160,7 +160,7 @@ export default async function handler(req, res) {
       <h3>Check-in Information</h3>
       A self-check-in code and detailed directions will be sent to you 3 days before your arrival.
       If you have any questions in the meantime, reply to this email or contact us at
-      <a href="mailto:cascadeskipartments@gmail.com">cascadeskipartments@gmail.com</a>.
+      <a href="mailto:cascadeskiapartments@gmail.com">cascadeskiapartments@gmail.com</a>.
     </div>
 
     <div class="info-box">
@@ -172,7 +172,7 @@ export default async function handler(req, res) {
   <div class="footer">
     <p><strong>Cascade Apartment 4</strong><br>
     Baw Baw Village, Mt Baw Baw VIC 3833<br>
-    <a href="mailto:cascadeskipartments@gmail.com">cascadeskipartments@gmail.com</a></p>
+    <a href="mailto:cascadeskiapartments@gmail.com">cascadeskiapartments@gmail.com</a></p>
     <p style="margin-top:16px; color:#9ca3af; font-size:12px;">
       You're receiving this email because you made a booking at mtbawbawcascade4.com.
     </p>
