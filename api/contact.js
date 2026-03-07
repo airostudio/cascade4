@@ -2,18 +2,18 @@
  * Vercel Serverless Function — /api/contact
  *
  * Handles contact form submissions from the front page.
- * Sends an enquiry notification to cascadeskiapartments@gmail.com
+ * Sends an enquiry notification to cascadeskipartments@gmail.com
  * and an auto-reply acknowledgement to the sender.
  *
  * Required environment variables (set in Vercel dashboard):
  *   RESEND_API_KEY   — your Resend API key
- *   EMAIL_FROM       — verified sender address (e.g. cascadeskiapartments@gmail.com)
+ *   EMAIL_FROM       — verified sender address (e.g. cascadeskipartments@gmail.com)
  *
  * For local testing set these in .env.local and run: vercel dev
  */
 
 const RESEND_API   = 'https://api.resend.com/emails';
-const CONTACT_DEST = 'cascadeskiapartments@gmail.com';
+const CONTACT_DEST = 'cascadeskipartments@gmail.com';
 
 export default async function handler(req, res) {
   // CORS preflight
@@ -166,7 +166,7 @@ export default async function handler(req, res) {
   <div class="footer">
     <p><strong>Cascade Apartment 4</strong><br>
     Baw Baw Village, Mt Baw Baw VIC 3833<br>
-    <a href="mailto:cascadeskiapartments@gmail.com">cascadeskiapartments@gmail.com</a></p>
+    <a href="mailto:cascadeskipartments@gmail.com">cascadeskipartments@gmail.com</a></p>
     <p style="margin-top:12px; color:#9ca3af; font-size:12px;">
       You're receiving this because you submitted a contact form at mtbawbawcascade4.com.
     </p>

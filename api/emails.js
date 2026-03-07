@@ -7,12 +7,12 @@
  *
  * Required environment variables (already set for the contact form):
  *   RESEND_API_KEY   — your Resend API key
- *   ADMIN_EMAIL      — the admin notification address (e.g. cascadeskiapartments@gmail.com)
+ *   ADMIN_EMAIL      — the admin notification address (e.g. cascadeskipartments@gmail.com)
  *                      falls back to EMAIL_FROM if not set
  */
 
 const RESEND_API    = 'https://api.resend.com';
-const CONTACT_DEST  = 'cascadeskiapartments@gmail.com';
+const CONTACT_DEST  = 'cascadeskipartments@gmail.com';
 // Matches subject format: "New enquiry from Name <email>: Subject"
 const SUBJECT_RE    = /^New enquiry from (.+?) <([^>]+)>: (.+)$/;
 
