@@ -745,6 +745,10 @@
                 alert('Check-out must be after check-in.');
                 return;
             }
+            if (window.CA3Data && window.CA3Data.hasOverlap(f.bkCheckin.value, f.bkCheckout.value)) {
+                alert('BOOKING CONFLICT\n\nThese dates overlap an existing booking.\n\nA new booking may only start on the same day a previous booking checks out (same-day turnover). Any other date overlap is not permitted.');
+                return;
+            }
             var newId    = document.getElementById('bkCreateId').dataset.pendingId || (window.CA3Data ? window.CA3Data.generateId('CA3') : 'CA3-' + Date.now());
             var nights   = Math.round((new Date(f.bkCheckout.value) - new Date(f.bkCheckin.value)) / 86400000);
             var totalNum = parseFloat(f.bkTotal.value) || 0;
@@ -861,6 +865,10 @@
                 total:    fmtMoney(f.bkEditTotal.value)
             };
 
+            if (window.CA3Data && window.CA3Data.hasOverlap(data.checkin, data.checkout, currentEditId)) {
+                alert('BOOKING CONFLICT\n\nThese dates overlap an existing booking.\n\nA new booking may only start on the same day a previous booking checks out (same-day turnover). Any other date overlap is not permitted.');
+                return;
+            }
             if (window.CA3Data) {
                 window.CA3Data.updateBooking(currentEditId, {
                     guestName:  data.name,

@@ -669,7 +669,8 @@
 
       // Hard availability gate — prevent double-booking even if client-side
       // state somehow got out of sync between date selection and submission.
-      if (!refreshAvailability(ci, co)) {
+      // Uses half-open interval: new checkIn == existing checkOut is allowed (same-day turnover).
+      if (!refreshAvailability(ci, co) || (window.CA3Data && window.CA3Data.hasOverlap(ci, co))) {
         window.CascadeApp?.showToast('Selected dates are not available. Please choose different dates.', 'error');
         const staySection = form.querySelector('[name="checkinDate"]')?.closest('.booking-form-section');
         if (staySection) staySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
