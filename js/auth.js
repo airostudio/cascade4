@@ -1,5 +1,5 @@
 /**
- * Cascade Apartment 3 — Client-side Authentication Module
+ * Cascade Apartment 4 — Client-side Authentication Module
  *
  * Uses SHA-256 (Web Crypto API) to hash credentials on first login.
  * Hashed credentials are stored in localStorage; session in sessionStorage.
@@ -24,7 +24,7 @@
     // then stored as hashes in localStorage. Plaintext is never re-used after that.
     var SEED = [
         {
-            email:    'hello@mtbawbawcascade3.com',
+            email:    'cascadeskiapartments@gmail.com',
             password: 'CaAdmin#2026',
             role:     'admin',
             name:     'Admin',

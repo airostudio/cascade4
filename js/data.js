@@ -1,5 +1,5 @@
 /**
- * Cascade Apartment 3 - Shared Data Layer
+ * Cascade Apartment 4 - Shared Data Layer
  * Provides localStorage persistence for bookings, blocked dates,
  * iCal connections, and settings across all admin pages.
  */
@@ -112,6 +112,22 @@
       const d = new Date(dateStr);
       return this.getBlocked().some(bl => {
         return d >= new Date(bl.startDate) && d <= new Date(bl.endDate);
+      });
+    },
+
+    // Returns true if [checkIn, checkOut) overlaps any active booking.
+    // Uses half-open intervals so a new checkIn on the same day as an existing
+    // checkOut is NOT an overlap — same-day turnovers are always permitted.
+    // Pass excludeId when editing an existing booking so it is not checked against itself.
+    hasOverlap(checkIn, checkOut, excludeId) {
+      const ci = new Date(checkIn);
+      const co = new Date(checkOut);
+      return this.getBookings().some(function(b) {
+        if (b.status === 'cancelled') return false;
+        if (excludeId && b.id === excludeId) return false;
+        const bci = new Date(b.checkIn);
+        const bco = new Date(b.checkOut);
+        return ci < bco && co > bci;
       });
     },
 

@@ -1,5 +1,5 @@
 /**
- * Cascade Apartment 3 - Admin Panel JavaScript
+ * Cascade Apartment 4 - Admin Panel JavaScript
  * Handles: Dashboard interactions, property management,
  * booking management, and admin-specific UI
  */

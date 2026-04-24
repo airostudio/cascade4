@@ -1,5 +1,5 @@
 /**
- * Cascade Apartment 3 — Stripe Payment Element
+ * Cascade Apartment 4 — Stripe Payment Element
  *
  * Flow (matches Stripe's recommended integration):
  *   1. Page load  → read booking amount from sessionStorage

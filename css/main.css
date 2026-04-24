@@ -1,5 +1,5 @@
 /* ============================================
-   Cascade Apartment 3 - Accommodation Booking Platform
+   Cascade Apartment 4 - Accommodation Booking Platform
    Main Stylesheet & Design System
    ============================================ */
 
@@ -321,9 +321,10 @@ h6 { font-size: var(--font-size-md); }
 
 .logo svg,
 .logo-icon {
-  width: 38px;
+  width: auto;
   height: 38px;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
 .logo-wordmark {

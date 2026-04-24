@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cascade Apartment 3 — Alpine Retreat at Mt Baw Baw</title>
-  <meta name="description" content="Cascade Apartment 3 is a premium self-contained alpine retreat at Mt Baw Baw, VIC. Ski-in/ski-out access, wood fireplace, mountain views. Sleeps up to 8 guests.">
+  <title>Cascade Apartment 4 — Alpine Retreat at Mt Baw Baw</title>
+  <meta name="description" content="Cascade Apartment 4 is a premium self-contained alpine retreat at Mt Baw Baw, VIC. Ski-in/ski-out access, wood fireplace, mountain views. Sleeps up to 8 guests.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -306,6 +306,34 @@
       .hero-book-field:last-of-type { border-bottom: none; }
     }
 
+    /* ── Hero Dots ───────────────────────────────────────────── */
+    .hero-dots {
+      position: absolute;
+      bottom: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 3;
+    }
+    .hero-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.45);
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .hero-dot.active {
+      background: #fff;
+      transform: scale(1.35);
+    }
+    @media (max-width: 600px) {
+      .hero-dots { bottom: 260px; }
+    }
+
     /* ── Contact Section ─────────────────────────────────────── */
     .contact-grid {
       display: grid;
@@ -397,15 +425,10 @@
   <header class="site-header site-header--transparent" id="siteHeader">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M3 36 L15 9 L27 36Z" fill="currentColor" fill-opacity="0.42"/>
-          <path d="M17 36 L30 3 L43 36Z" fill="currentColor"/>
-          <path d="M30 3 L36.5 17 L23.5 17Z" fill="currentColor" fill-opacity="0.22"/>
-          <path d="M1 40 Q5.5 37.2 10 40 Q14.5 42.8 19 40 Q23.5 37.2 28 40 Q32.5 42.8 37 40 Q39.5 38.5 43 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-        </svg>
+        <img src="images/cascade4.png" class="logo-icon" alt="Cascade Apartment 4">
         <span class="logo-wordmark">
           <span class="logo-wordmark-main">Cascade</span>
-          <span class="logo-wordmark-sub">Apartment 3</span>
+          <span class="logo-wordmark-sub">Apartment 4</span>
         </span>
       </a>
       <nav class="nav-main">
@@ -436,21 +459,31 @@
   <section class="hero">
     <div class="hero-slideshow" id="heroSlideshow">
       <div class="hero-slide active">
-        <img src="images/cascade.webp" alt="Cascade Apartment 3 — Mt Baw Baw" style="width:100%;height:100%;object-fit:cover;">
+        <img src="images/IMG_4476.jpg" alt="Cascade Apartment 4 — fully equipped kitchen" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="hero-slide">
-        <img src="images/20240425_111536.jpg" alt="Cascade Apartment 3 interior" style="width:100%;height:100%;object-fit:cover;">
+        <img src="images/IMG_4489.jpg" alt="Cascade Apartment 4 — open plan living and kitchen" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="hero-slide">
-        <img src="images/20240331_085622.jpg" alt="Cascade Apartment 3 living area" style="width:100%;height:100%;object-fit:cover;">
+        <img src="images/IMG_4464.jpg" alt="Cascade Apartment 4 — cosy fireplace" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="hero-slide">
-        <img src="images/20220423_171724.jpg" alt="Cascade Apartment 3 mountain views" style="width:100%;height:100%;object-fit:cover;">
+        <img src="images/IMG_4495.jpg" alt="Cascade Apartment 4 — bedroom" style="width:100%;height:100%;object-fit:cover;">
       </div>
+      <div class="hero-slide">
+        <img src="images/IMG_4501.jpg" alt="Cascade Apartment 4 — second bedroom" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
+    <div class="hero-dots" id="heroDots">
+      <button class="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
+      <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
+      <button class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
+      <button class="hero-dot" data-slide="3" aria-label="Slide 4"></button>
+      <button class="hero-dot" data-slide="4" aria-label="Slide 5"></button>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1 class="hero-title">Cascade Apartment 3</h1>
+      <h1 class="hero-title">Cascade Apartment 4</h1>
       <p class="hero-subtitle">A premium alpine retreat at Mt Baw Baw — ski-in/ski-out, wood fireplace and stunning mountain views for up to 8 guests</p>
       <div class="hero-book-bar">
         <div class="hero-book-field">
@@ -496,11 +529,11 @@
     <div class="container">
       <div class="about-layout">
         <div>
-          <img src="images/20230218_132555.jpg" alt="Cascade Apartment 3 — living area" loading="lazy">
+          <img src="images/IMG_4461.jpg" alt="Cascade Apartment 4 — living area" loading="lazy">
         </div>
         <div class="about-text">
           <h2>Your Alpine Base at Mt Baw Baw</h2>
-          <p>Cascade Apartment 3 is a recently renovated, fully self-contained apartment set over two levels in the heart of Baw Baw Village. Nestled among snowgums with direct ski-in/ski-out access to the slopes, it's the perfect base for all seasons.</p>
+          <p>Cascade Apartment 4 is a recently renovated, fully self-contained apartment set over two levels in the heart of Baw Baw Village. Nestled among snowgums with direct ski-in/ski-out access to the slopes, it's the perfect base for all seasons.</p>
           <p>The large open-plan living area features three couches, a flat-screen TV, and a gas log fire to warm up après-ski. The fully equipped kitchen has everything you need, including a microwave and air fryer. Hydronic heating throughout keeps the whole apartment cosy, with a dedicated drying room for your gear.</p>
           <p>Bedroom 1 has a comfortable Queen bed. Bedroom 2 features two tri-bunks — sleeping up to 6 in bunk configurations — making it ideal for families and groups. Step onto the private balcony for sweeping mountain views, with resort parking close by.</p>
           <div class="btn-group" style="margin-top: var(--space-xl);">
@@ -521,7 +554,7 @@
       </div>
       <div class="season-cards">
         <div class="season-card season-card--winter">
-          <img src="images/cascade.webp" alt="Mt Baw Baw winter ski season" class="season-card-bg" loading="lazy">
+          <img src="images/IMG_4515.jpg" alt="Mt Baw Baw winter ski season" class="season-card-bg" loading="lazy">
           <div class="season-card-overlay"></div>
           <div class="season-card-content">
             <span class="season-card-tag">Jun – Aug</span>
@@ -531,7 +564,7 @@
           </div>
         </div>
         <div class="season-card season-card--summer">
-          <img src="images/20240331_085622.jpg" alt="Mt Baw Baw summer alpine" class="season-card-bg" loading="lazy">
+          <img src="images/IMG_4495.jpg" alt="Mt Baw Baw summer alpine" class="season-card-bg" loading="lazy">
           <div class="season-card-overlay"></div>
           <div class="season-card-content">
             <span class="season-card-tag">Sep – May</span>
@@ -556,13 +589,13 @@
       </div>
       <div class="gallery-preview">
         <div class="gallery-preview-item">
-          <img src="images/20240425_111536.jpg" alt="Cascade Apartment 3" loading="lazy">
+          <img src="images/IMG_4520.jpg" alt="Cascade Apartment 4" loading="lazy">
         </div>
         <div class="gallery-preview-item">
-          <img src="images/20240515_094048.jpg" alt="Cascade Apartment 3 interior" loading="lazy">
+          <img src="images/IMG_4514.jpg" alt="Cascade Apartment 4 interior" loading="lazy">
         </div>
         <div class="gallery-preview-item">
-          <img src="images/20220224_110708.jpg" alt="Cascade Apartment 3 bedroom" loading="lazy">
+          <img src="images/IMG_4522.jpg" alt="Cascade Apartment 4 bedroom" loading="lazy">
         </div>
       </div>
     </div>
@@ -669,7 +702,7 @@
     <div class="container container--narrow">
       <div class="text-center" style="margin-bottom: var(--space-2xl);">
         <h2>What Guests Say</h2>
-        <p style="color: var(--color-gray); margin-top: var(--space-sm);">Real reviews from guests who've stayed at Cascade Apartment 3</p>
+        <p style="color: var(--color-gray); margin-top: var(--space-sm);">Real reviews from guests who've stayed at Cascade Apartment 4</p>
       </div>
       <div class="grid grid-2 gap-xl">
         <div class="review-card" style="background: var(--color-white); border-radius: var(--radius-lg); padding: var(--space-xl); box-shadow: var(--shadow-sm);">
@@ -744,7 +777,7 @@
             </div>
             <div>
               <div class="contact-info-label">Email</div>
-              <div class="contact-info-value"><a href="mailto:hello@mtbawbawcascade3.com">hello@mtbawbawcascade3.com</a></div>
+              <div class="contact-info-value"><a href="mailto:cascadeskiapartments@gmail.com">cascadeskiapartments@gmail.com</a></div>
             </div>
           </div>
           <div class="contact-info-item">
@@ -753,7 +786,7 @@
             </div>
             <div>
               <div class="contact-info-label">Address</div>
-              <div class="contact-info-value">Cascade Apartment 3<br>Baw Baw Village, Mt Baw Baw<br>VIC 3833, Australia</div>
+              <div class="contact-info-value">Cascade Apartment 4<br>Baw Baw Village, Mt Baw Baw<br>VIC 3833, Australia</div>
             </div>
           </div>
           <div class="contact-info-item">
@@ -834,15 +867,10 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="index.html" class="logo">
-            <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M3 36 L15 9 L27 36Z" fill="currentColor" fill-opacity="0.42"/>
-              <path d="M17 36 L30 3 L43 36Z" fill="currentColor"/>
-              <path d="M30 3 L36.5 17 L23.5 17Z" fill="currentColor" fill-opacity="0.22"/>
-              <path d="M1 40 Q5.5 37.2 10 40 Q14.5 42.8 19 40 Q23.5 37.2 28 40 Q32.5 42.8 37 40 Q39.5 38.5 43 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-            </svg>
+            <img src="images/cascade4.png" class="logo-icon" alt="Cascade Apartment 4">
             <span class="logo-wordmark">
               <span class="logo-wordmark-main">Cascade</span>
-              <span class="logo-wordmark-sub">Apartment 3</span>
+              <span class="logo-wordmark-sub">Apartment 4</span>
             </span>
           </a>
           <p>A premium self-contained alpine retreat at Mt Baw Baw, VIC. Ski-in/ski-out access, mountain views, wood fireplace — year-round escapes for up to 8 guests.</p>
@@ -877,7 +905,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Cascade Apartment 3. All rights reserved.</p>
+        <p>&copy; 2026 Cascade Apartment 4. All rights reserved.</p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -1070,8 +1098,8 @@
                 + '\nSubject: ' + subject
                 + '\n\nMessage:\n' + message;
               window.open(
-                'mailto:hello@mtbawbawcascade3.com'
-                  + '?subject=' + encodeURIComponent(subject + ' — mtbawbawcascade3.com')
+                'mailto:cascadeskiapartments@gmail.com'
+                  + '?subject=' + encodeURIComponent(subject + ' — mtbawbawcascade4.com')
                   + '&body='    + encodeURIComponent(body)
               );
               form.style.display      = 'none';
@@ -1090,7 +1118,7 @@
           successEl.style.display = 'block';
         } catch (err) {
           errorBox.innerHTML     = (err.message || 'Could not send your message.')
-            + ' Please email us directly at <a href="mailto:hello@mtbawbawcascade3.com" style="color:#dc2626;font-weight:600;">hello@mtbawbawcascade3.com</a>';
+            + ' Please email us directly at <a href="mailto:cascadeskiapartments@gmail.com" style="color:#dc2626;font-weight:600;">cascadeskiapartments@gmail.com</a>';
           errorBox.style.display = 'block';
           submitBtn.disabled     = false;
           submitBtn.textContent  = 'Send Message';

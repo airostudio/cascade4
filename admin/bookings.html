@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookings - Cascade Apartment 3 Admin</title>
+    <title>Bookings - Cascade Apartment 4 Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -293,7 +293,7 @@
             <div class="admin-page-header">
                 <div class="admin-page-header__info">
                     <h1 class="admin-page-header__title">Bookings</h1>
-                    <p class="admin-page-header__description">Manage all reservations for Cascade Apartment 3</p>
+                    <p class="admin-page-header__description">Manage all reservations for Cascade Apartment 4</p>
                 </div>
                 <div class="admin-page-header__actions">
                     <div class="admin-filter-buttons">
@@ -476,7 +476,7 @@
                     </div>
                     <div class="bk-detail-row">
                         <span class="bk-detail-label">Property</span>
-                        <span class="bk-detail-value">Cascade Apartment 3</span>
+                        <span class="bk-detail-value">Cascade Apartment 4</span>
                     </div>
                     <div class="bk-detail-row">
                         <span class="bk-detail-label">Check-in</span>
@@ -745,6 +745,10 @@
                 alert('Check-out must be after check-in.');
                 return;
             }
+            if (window.CA3Data && window.CA3Data.hasOverlap(f.bkCheckin.value, f.bkCheckout.value)) {
+                alert('BOOKING CONFLICT\n\nThese dates overlap an existing booking.\n\nA new booking may only start on the same day a previous booking checks out (same-day turnover). Any other date overlap is not permitted.');
+                return;
+            }
             var newId    = document.getElementById('bkCreateId').dataset.pendingId || (window.CA3Data ? window.CA3Data.generateId('CA3') : 'CA3-' + Date.now());
             var nights   = Math.round((new Date(f.bkCheckout.value) - new Date(f.bkCheckin.value)) / 86400000);
             var totalNum = parseFloat(f.bkTotal.value) || 0;
@@ -861,6 +865,10 @@
                 total:    fmtMoney(f.bkEditTotal.value)
             };
 
+            if (window.CA3Data && window.CA3Data.hasOverlap(data.checkin, data.checkout, currentEditId)) {
+                alert('BOOKING CONFLICT\n\nThese dates overlap an existing booking.\n\nA new booking may only start on the same day a previous booking checks out (same-day turnover). Any other date overlap is not permitted.');
+                return;
+            }
             if (window.CA3Data) {
                 window.CA3Data.updateBooking(currentEditId, {
                     guestName:  data.name,

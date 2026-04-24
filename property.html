@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cascade Apartment 3 — Mt Baw Baw Alpine Retreat</title>
-  <meta name="description" content="Book Cascade Apartment 3 at Mt Baw Baw — a self-contained alpine retreat with ski-in/ski-out access, wood fireplace, and stunning mountain views.">
+  <title>Cascade Apartment 4 — Mt Baw Baw Alpine Retreat</title>
+  <meta name="description" content="Book Cascade Apartment 4 at Mt Baw Baw — a self-contained alpine retreat with ski-in/ski-out access, wood fireplace, and stunning mountain views.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -103,8 +103,8 @@
     }
     .property-type-badge {
       display: inline-block;
-      background: #e8f4fd;
-      color: #1a73a7;
+      background: rgba(15,39,68,0.08);
+      color: var(--color-primary);
       padding: 4px 12px;
       border-radius: 20px;
       font-size: 0.8rem;
@@ -129,8 +129,8 @@
       transition: all 0.2s;
     }
     .property-actions .btn-icon:hover {
-      border-color: #1a73a7;
-      color: #1a73a7;
+      border-color: var(--color-primary);
+      color: var(--color-primary);
     }
     .property-actions .btn-icon svg {
       width: 20px;
@@ -170,7 +170,7 @@
     }
     .property-tab:hover { color: #1a1a2e; }
     .property-tab.active {
-      color: #1a73a7;
+      color: var(--color-primary);
     }
     .property-tab.active::after {
       content: '';
@@ -179,7 +179,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: #1a73a7;
+      background: var(--color-secondary);
       border-radius: 2px 2px 0 0;
     }
 
@@ -214,7 +214,7 @@
     .feature-card svg {
       width: 32px;
       height: 32px;
-      color: #1a73a7;
+      color: var(--color-secondary);
       margin-bottom: 8px;
     }
     .feature-card .feature-value {
@@ -249,11 +249,11 @@
       color: #333;
       transition: background 0.2s;
     }
-    .amenity-item:hover { background: #e8f4fd; }
+    .amenity-item:hover { background: var(--color-cream); }
     .amenity-item svg {
       width: 24px;
       height: 24px;
-      color: #1a73a7;
+      color: var(--color-primary);
       flex-shrink: 0;
     }
 
@@ -273,12 +273,12 @@
       position: relative;
     }
     .rate-card:hover {
-      border-color: #1a73a7;
-      box-shadow: 0 4px 20px rgba(26,115,167,0.12);
+      border-color: var(--color-primary);
+      box-shadow: 0 4px 20px rgba(15,39,68,0.12);
     }
     .rate-card.featured {
-      border-color: #1a73a7;
-      background: linear-gradient(to bottom, #e8f4fd, #fff);
+      border-color: var(--color-gold);
+      background: linear-gradient(to bottom, #fdf8ec, #fff);
     }
     .rate-card.featured::before {
       content: 'Best Value';
@@ -286,12 +286,12 @@
       top: -12px;
       left: 50%;
       transform: translateX(-50%);
-      background: #1a73a7;
-      color: #fff;
+      background: var(--color-gold);
+      color: var(--color-primary-dark);
       padding: 4px 16px;
       border-radius: 20px;
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -349,7 +349,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
       font-weight: 700;
-      color: #1a73a7;
+      color: var(--color-gold);
       line-height: 1;
     }
     .reviews-score .label {
@@ -430,12 +430,12 @@
     .location-map-placeholder {
       width: 100%;
       height: 350px;
-      background: linear-gradient(135deg, #e8f4fd, #d1ecf9);
+      background: linear-gradient(135deg, var(--color-cream), var(--color-light));
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #1a73a7;
+      color: var(--color-primary);
       font-size: 1rem;
       margin-bottom: 24px;
       position: relative;
@@ -446,10 +446,10 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, transparent 49%, #c0dff0 49%, #c0dff0 51%, transparent 51%),
-        linear-gradient(0deg, transparent 49%, #c0dff0 49%, #c0dff0 51%, transparent 51%);
+        linear-gradient(90deg, transparent 49%, var(--color-muted) 49%, var(--color-muted) 51%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, var(--color-muted) 49%, var(--color-muted) 51%, transparent 51%);
       background-size: 40px 40px;
-      opacity: 0.5;
+      opacity: 0.3;
     }
     .location-map-placeholder .map-pin {
       position: relative;
@@ -486,7 +486,7 @@
     .location-detail-card h4 svg {
       width: 18px;
       height: 18px;
-      color: #1a73a7;
+      color: var(--color-primary);
     }
     .location-detail-card p,
     .location-detail-card li {
@@ -573,7 +573,7 @@
     .btn-book {
       width: 100%;
       padding: 16px;
-      background: linear-gradient(135deg, #1a73a7, #2196F3);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
       color: #fff;
       border: none;
       border-radius: 12px;
@@ -583,11 +583,12 @@
       cursor: pointer;
       transition: all 0.3s;
       margin-bottom: 16px;
+      letter-spacing: 0.02em;
     }
     .btn-book:hover {
-      background: linear-gradient(135deg, #155d87, #1976D2);
+      background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(26,115,167,0.35);
+      box-shadow: 0 4px 16px rgba(15,39,68,0.35);
     }
     .booking-note {
       text-align: center;
@@ -866,15 +867,10 @@
   <header class="site-header" id="siteHeader">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M3 36 L15 9 L27 36Z" fill="currentColor" fill-opacity="0.42"/>
-          <path d="M17 36 L30 3 L43 36Z" fill="currentColor"/>
-          <path d="M30 3 L36.5 17 L23.5 17Z" fill="currentColor" fill-opacity="0.22"/>
-          <path d="M1 40 Q5.5 37.2 10 40 Q14.5 42.8 19 40 Q23.5 37.2 28 40 Q32.5 42.8 37 40 Q39.5 38.5 43 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-        </svg>
+        <img src="images/cascade4.png" class="logo-icon" alt="Cascade Apartment 4">
         <span class="logo-wordmark">
           <span class="logo-wordmark-main">Cascade</span>
-          <span class="logo-wordmark-sub">Apartment 3</span>
+          <span class="logo-wordmark-sub">Apartment 4</span>
         </span>
       </a>
       <nav class="nav-main">
@@ -905,19 +901,19 @@
   <div class="container">
     <div class="gallery">
       <div class="gallery-item">
-        <img src="images/20240425_111536.jpg" alt="Cascade Apartment 3" style="width:100%;height:100%;object-fit:cover;">
+        <img src="images/IMG_4520.jpg" alt="Cascade Apartment 4" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="gallery-item">
-        <img src="images/20240515_094048.jpg" alt="Cascade Apartment 3 interior" style="width:100%;height:100%;object-fit:cover;">
+        <img src="images/IMG_4514.jpg" alt="Cascade Apartment 4 interior" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="gallery-item">
-        <img src="images/20220423_171724.jpg" alt="Cascade Apartment 3 living area" style="width:100%;height:100%;object-fit:cover;">
+        <img src="images/IMG_4522.jpg" alt="Cascade Apartment 4 living area" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="gallery-item">
-        <img src="images/20220224_110708.jpg" alt="Cascade Apartment 3 bedroom" style="width:100%;height:100%;object-fit:cover;">
+        <img src="images/IMG_4515.jpg" alt="Cascade Apartment 4 bedroom" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="gallery-item">
-        <img src="images/20230218_132555.jpg" alt="Cascade Apartment 3 views" style="width:100%;height:100%;object-fit:cover;">
+        <img src="images/IMG_4461.jpg" alt="Cascade Apartment 4 views" style="width:100%;height:100%;object-fit:cover;">
         <button class="gallery-btn">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
           Show all photos
@@ -929,7 +925,7 @@
     <div class="property-header">
       <div class="property-header-top">
         <div>
-          <h1 class="property-title">Cascade Apartment 3</h1>
+          <h1 class="property-title">Cascade Apartment 4</h1>
           <div class="property-meta">
             <span class="property-location">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -973,7 +969,7 @@
         <!-- Overview Tab -->
         <div class="tab-content active" id="tab-overview">
           <div class="property-description">
-            <p>Welcome to Cascade Apartment 3, a recently renovated, fully self-contained apartment set over two levels in the heart of Baw Baw Village at Mt Baw Baw. Nestled among snowgum trees with direct ski-in/ski-out access, this alpine retreat is the perfect base for all seasons — from winter skiing to summer hiking and mountain biking.</p>
+            <p>Welcome to Cascade Apartment 4, a recently renovated, fully self-contained apartment set over two levels in the heart of Baw Baw Village at Mt Baw Baw. Nestled among snowgum trees with direct ski-in/ski-out access, this alpine retreat is the perfect base for all seasons — from winter skiing to summer hiking and mountain biking.</p>
             <p>The large open-plan living and dining area features three couches, a flat-screen TV, CD player, and a gas log fire to keep you warm après-ski. The fully equipped kitchen includes a fridge/freezer, stove, oven, microwave, sandwich maker, and air fryer. Hydronic heating runs throughout the apartment, and a dedicated drying room means you're always ready for the next day on the mountain.</p>
             <p><strong>Bedroom 1</strong> (downstairs) has a comfortable Queen bed. <strong>Bedroom 2</strong> (downstairs) features two tri-bunks — each with a double on the bottom and a single on top — sleeping up to 6 in this room alone. Combined, the apartment sleeps up to 8 guests across two bathrooms. Step out onto the private balcony for sweeping alpine views, with resort parking just a short walk away.</p>
           </div>
@@ -1110,7 +1106,7 @@
           <!-- Review 1 -->
           <div class="review-card">
             <div class="review-header">
-              <div class="review-avatar" style="background:linear-gradient(135deg,#1a73a7,#2196F3);">SM</div>
+              <div class="review-avatar" style="background:linear-gradient(135deg,#0f2744,#1a3a5c);">SM</div>
               <div class="review-author-info">
                 <div class="review-author">Sarah Mitchell</div>
                 <div class="review-date">January 2026</div>
@@ -1180,7 +1176,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                 Address
               </h4>
-              <p>Cascade Apartment 3<br>Baw Baw Village<br>Mt Baw Baw, VIC 3833<br>Australia</p>
+              <p>Cascade Apartment 4<br>Baw Baw Village<br>Mt Baw Baw, VIC 3833<br>Australia</p>
             </div>
             <div class="location-detail-card">
               <h4>
@@ -1259,15 +1255,10 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="index.html" class="logo">
-            <svg class="logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M3 36 L15 9 L27 36Z" fill="currentColor" fill-opacity="0.42"/>
-              <path d="M17 36 L30 3 L43 36Z" fill="currentColor"/>
-              <path d="M30 3 L36.5 17 L23.5 17Z" fill="currentColor" fill-opacity="0.22"/>
-              <path d="M1 40 Q5.5 37.2 10 40 Q14.5 42.8 19 40 Q23.5 37.2 28 40 Q32.5 42.8 37 40 Q39.5 38.5 43 40" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-            </svg>
+            <img src="images/cascade4.png" class="logo-icon" alt="Cascade Apartment 4">
             <span class="logo-wordmark">
               <span class="logo-wordmark-main">Cascade</span>
-              <span class="logo-wordmark-sub">Apartment 3</span>
+              <span class="logo-wordmark-sub">Apartment 4</span>
             </span>
           </a>
           <p>A premium alpine apartment at Baw Baw Village, Mt Baw Baw. Ski-in/ski-out access, stunning mountain views, and everything you need for an unforgettable alpine escape.</p>
@@ -1303,7 +1294,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Cascade Apartment 3. All rights reserved.</p>
+        <p>&copy; 2026 Cascade Apartment 4. All rights reserved.</p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -1440,16 +1431,30 @@
 
     // Lightbox
     const lightboxImages = [
-      { src: 'images/20240425_111536.jpg', alt: 'Cascade Apartment 3' },
-      { src: 'images/20240515_094048.jpg', alt: 'Cascade Apartment 3 interior' },
-      { src: 'images/20220423_171724.jpg', alt: 'Cascade Apartment 3 living area' },
-      { src: 'images/20220224_110708.jpg', alt: 'Cascade Apartment 3 bedroom' },
-      { src: 'images/20230218_132555.jpg', alt: 'Cascade Apartment 3 views' },
-      { src: 'images/20240515_093427.jpg', alt: 'Cascade Apartment 3 deck' },
-      { src: 'images/20240331_085622.jpg', alt: 'Cascade Apartment 3 mountain' },
-      { src: 'images/20220423_171813.jpg', alt: 'Cascade Apartment 3 exterior' },
-      { src: 'images/20220423_172833.jpg', alt: 'Cascade Apartment 3 kitchen' },
-      { src: 'images/cascade.webp', alt: 'Cascade Apartment 3 aerial' }
+      { src: 'images/IMG_4216.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4220.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4223.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4225.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4232.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4233.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4235.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4252.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4257.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4263.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4453.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4461.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4464.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4476.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4489.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4495.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4501.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4510.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4514.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4515.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4520.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4521.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_4522.jpg', alt: 'Cascade Apartment 4' },
+      { src: 'images/IMG_6171.jpg', alt: 'Cascade Apartment 4' }
     ];
     let lbIndex = 0;
     const lb = document.getElementById('lightbox');

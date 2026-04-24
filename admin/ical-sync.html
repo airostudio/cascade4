@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iCal Sync - Cascade Apartment 3 Admin</title>
+    <title>iCal Sync - Cascade Apartment 4 Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -654,7 +654,7 @@
                     <line x1="12" y1="8" x2="12.01" y2="8"></line>
                 </svg>
                 <p>
-                    <strong>How iCal Sync works:</strong> iCal synchronisation allows you to import and export your property availability calendars using the industry-standard iCalendar format. By connecting your Cascade Apartment 3 calendar with external platforms like Airbnb, Booking.com, and VRBO, you can automatically keep availability in sync across all channels and prevent double bookings.
+                    <strong>How iCal Sync works:</strong> iCal synchronisation allows you to import and export your property availability calendars using the industry-standard iCalendar format. By connecting your Cascade Apartment 4 calendar with external platforms like Airbnb, Booking.com, and VRBO, you can automatically keep availability in sync across all channels and prevent double bookings.
                 </p>
             </div>
 
@@ -671,19 +671,19 @@
                     <h2>Export Your Calendar</h2>
                 </div>
                 <div class="card-body">
-                    <p>Share your Cascade Apartment 3 availability calendar with external booking platforms. Copy the iCal export URL below and paste it into the external platform's calendar import settings to keep availability synchronised.</p>
+                    <p>Share your Cascade Apartment 4 availability calendar with external booking platforms. Copy the iCal export URL below and paste it into the external platform's calendar import settings to keep availability synchronised.</p>
 
                     <div class="form-group">
                         <label for="export-property">Property</label>
                         <select id="export-property" class="form-select" style="max-width: 400px;">
-                            <option value="cascade-apt3">Cascade Apartment 3 — Falls Creek</option>
+                            <option value="cascade-apt3">Cascade Apartment 4 — Mt. Baw Baw</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Export URL</label>
                         <div class="export-url-wrapper">
-                            <div class="export-url-display" id="export-url">https://mtbawbawcascade3.com/ical/export/cascade-apt3.ics</div>
+                            <div class="export-url-display" id="export-url">https://mtbawbawcascade4.com/ical/export/cascade-apt3.ics</div>
                             <button class="btn-copy" onclick="copyExportUrl()">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -728,7 +728,7 @@
                             <div class="form-group">
                                 <label for="import-property">Property</label>
                                 <select id="import-property" class="form-select">
-                                    <option value="cascade-apt3">Cascade Apartment 3 — Falls Creek</option>
+                                    <option value="cascade-apt3">Cascade Apartment 4 — Mt. Baw Baw</option>
                                 </select>
                             </div>
                             <div class="form-group full-width">
@@ -912,7 +912,7 @@
                 lastSync: new Date().toISOString(),
                 eventsImported: 0,
                 frequency: '1hour',
-                exportUrl: 'https://mtbawbawcascade3.com/ical/export/cascade-apt3.ics'
+                exportUrl: 'https://mtbawbawcascade4.com/ical/export/cascade-apt3.ics'
             };
             if (window.CA3Data) CA3Data.addIcal(conn);
             document.getElementById('import-platform').value = '';
@@ -954,7 +954,7 @@
                 return `<tr>
                     <td>${timeStr}</td>
                     <td>${e.platform}</td>
-                    <td>Cascade Apartment 3</td>
+                    <td>Cascade Apartment 4</td>
                     <td>${dirBadge}</td>
                     <td>${statusBadge}</td>
                     <td><span class="events-count">${e.events}</span></td>
