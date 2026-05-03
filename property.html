@@ -1054,26 +1054,26 @@
         <div class="tab-content" id="tab-rates">
           <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:#1a1a2e;margin-bottom:20px;">Seasonal Pricing</h3>
           <div class="rates-grid">
-            <div class="rate-card winter">
-              <div class="rate-season">Winter Season</div>
-              <div class="rate-dates">Jun - Aug (Ski Season)</div>
-              <div class="rate-price">$385 <span>/ night</span></div>
-              <div class="rate-note">Minimum 2 nights</div>
+            <div class="rate-card winter featured">
+              <div class="rate-season">Weekend</div>
+              <div class="rate-dates">Fri – Sun · Ski Season (Jun–Oct)</div>
+              <div class="rate-price">$855 <span>/ night</span></div>
+              <div class="rate-note">Minimum 2 nights · No Saturday check-in</div>
             </div>
-            <div class="rate-card featured">
-              <div class="rate-season">Standard Season</div>
-              <div class="rate-dates">Mar - May &amp; Sep - Nov</div>
-              <div class="rate-price">$285 <span>/ night</span></div>
-              <div class="rate-note">Minimum 1 night</div>
+            <div class="rate-card winter">
+              <div class="rate-season">Weeknight</div>
+              <div class="rate-dates">Mon – Thu · Ski Season (Jun–Oct)</div>
+              <div class="rate-price">$855 <span>/ night</span></div>
+              <div class="rate-note">2+ nights · Single night $985</div>
             </div>
             <div class="rate-card">
-              <div class="rate-season">Off-Peak</div>
-              <div class="rate-dates">Dec - Feb</div>
-              <div class="rate-price">$220 <span>/ night</span></div>
-              <div class="rate-note">Minimum 1 night</div>
+              <div class="rate-season">Green Season</div>
+              <div class="rate-dates">Nov – May</div>
+              <div class="rate-price" style="font-size:1.4rem;color:#6b7280;">CLOSED</div>
+              <div class="rate-note">Property not available</div>
             </div>
           </div>
-          <p class="rates-footnote">* Rates shown are for the entire apartment (up to 8 guests). Cleaning fee of $150 applies per stay. Weekend and public holiday surcharges may apply. All rates in AUD.</p>
+          <p class="rates-footnote">* Rates are for the entire apartment (up to 8 guests). Cleaning fee applies per stay. All rates in AUD.</p>
         </div>
 
         <!-- Reviews Tab -->
@@ -1197,7 +1197,7 @@
       <!-- Booking Sidebar -->
       <aside class="booking-sidebar">
         <div class="booking-price-header">
-          <span class="price" id="pSidebarNightly">$285</span>
+          <span class="price" id="pSidebarNightly">$855</span>
           <span class="per-night">/ night</span>
         </div>
 
@@ -1356,11 +1356,16 @@
     })();
 
     // ── Seasonal rate helper ───────────────────────────────────────
-    function getRate(dateStr) {
-      var m = new Date(dateStr + 'T00:00:00').getMonth() + 1; // 1-12
-      if (m >= 6 && m <= 8) return 385;                        // Winter / Ski
-      if ((m >= 3 && m <= 5) || (m >= 9 && m <= 11)) return 285; // Standard
-      return 220;                                               // Off-peak
+    // Ski Season Jun–Oct: $855/night (1 weeknight = $985)
+    // Green Season Nov–May: CLOSED
+    function getRate(dateStr, totalNights) {
+      var d = new Date(dateStr + 'T00:00:00');
+      var m = d.getMonth() + 1;
+      var dow = d.getDay();
+      if ([1,2,3,4,5,11,12].includes(m)) return 0; // Green Season closed
+      // 1-night weeknight surcharge
+      if (totalNights === 1 && dow >= 1 && dow <= 4) return 985;
+      return 855;
     }
 
     function fmt(n) { return '$' + n.toLocaleString('en-AU'); }
@@ -1374,7 +1379,7 @@
       var nights = Math.round((new Date(co + 'T00:00:00') - new Date(ci + 'T00:00:00')) / 86400000);
       if (nights <= 0) return;
 
-      var rate     = getRate(ci);
+      var rate     = getRate(ci, nights);
       var accom    = rate * nights;
       var cleaning = 150;
       var service  = Math.round(accom * 0.05);
