@@ -17,7 +17,7 @@
 
   // Bump this whenever the seed data format changes. On version mismatch
   // any previously seeded fake/demo data is cleared so we start fresh.
-  const DATA_VERSION = '2';
+  const DATA_VERSION = '3';
 
   /* ─── Version migration ─────────────────────────────────────────── */
 
@@ -25,8 +25,8 @@
     const stored = localStorage.getItem(KEYS.VERSION);
     if (stored === DATA_VERSION) return;
 
-    // Clear any old demo/seed data from earlier versions
-    [KEYS.BOOKINGS, KEYS.BLOCKED, KEYS.ICAL].forEach(function(k) {
+    // Clear any old demo/seed data from earlier versions (including stale rates)
+    [KEYS.BOOKINGS, KEYS.BLOCKED, KEYS.ICAL, KEYS.RATES].forEach(function(k) {
       localStorage.removeItem(k);
     });
 
