@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Templates — Cascade Apartment 4 Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <script src="../js/auth.js"></script>
+    <script>(function(){if(!sessionStorage.getItem('ca3_session')){sessionStorage.setItem('ca3_redirect',location.href);location.href='/admin/login.html';}}());</script>
+    <style>
+        /* ── Layout ─────────────────────────────────────────────────── */
+        .et-layout { display: grid; grid-template-columns: 280px 1fr; gap: var(--space-xl); align-items: start; }
+        @media (max-width: 900px) { .et-layout { grid-template-columns: 1fr; } }
+
+        /* ── Template list ──────────────────────────────────────────── */
+        .et-list { background: var(--color-white); border: 1px solid var(--color-light); border-radius: var(--radius-lg); overflow: hidden; }
+        .et-list-header { padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--color-light); font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); color: var(--color-gray); text-transform: uppercase; letter-spacing: 0.05em; }
+        .et-item { display: flex; align-items: center; gap: var(--space-md); padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--color-light); cursor: pointer; transition: background var(--transition-fast); }
+        .et-item:last-child { border-bottom: none; }
+        .et-item:hover { background: var(--color-off-white); }
+        .et-item.active { background: rgba(15,39,68,0.05); border-left: 3px solid var(--color-primary); }
+        .et-item-icon { width: 36px; height: 36px; border-radius: var(--radius-md); background: rgba(201,168,76,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .et-item-icon svg { width: 16px; height: 16px; color: var(--color-secondary); }
+        .et-item-name { font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); color: var(--color-darker); }
+        .et-item-desc { font-size: var(--font-size-xs); color: var(--color-gray); margin-top: 1px; }
+
+        /* ── Compose panel ──────────────────────────────────────────── */
+        .et-compose { background: var(--color-white); border: 1px solid var(--color-light); border-radius: var(--radius-lg); overflow: hidden; }
+        .et-compose-header { display: flex; align-items: center; justify-content: space-between; padding: var(--space-lg) var(--space-xl); border-bottom: 1px solid var(--color-light); }
+        .et-compose-title { font-size: var(--font-size-md); font-weight: var(--font-weight-semibold); color: var(--color-darker); }
+        .et-compose-body { padding: var(--space-xl); }
+        .et-field { margin-bottom: var(--space-lg); }
+        .et-label { display: block; font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); color: var(--color-dark); margin-bottom: var(--space-xs); }
+        .et-input { width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-light); border-radius: var(--radius-md); font-size: var(--font-size-sm); color: var(--color-darker); font-family: var(--font-primary); transition: border-color var(--transition-fast); box-sizing: border-box; }
+        .et-input:focus { outline: none; border-color: var(--color-primary); }
+        select.et-input { cursor: pointer; }
+        .et-textarea { resize: vertical; min-height: 320px; line-height: 1.6; font-family: var(--font-primary); }
+
+        /* Variable chips */
+        .et-vars { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--space-md); }
+        .et-var { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; background: rgba(15,39,68,0.07); border-radius: var(--radius-full); font-size: 11px; font-weight: var(--font-weight-medium); color: var(--color-primary); cursor: pointer; user-select: none; transition: background var(--transition-fast); border: 1px solid transparent; }
+        .et-var:hover { background: rgba(15,39,68,0.14); }
+        .et-var-hint { font-size: var(--font-size-xs); color: var(--color-gray); margin-bottom: var(--space-xs); }
+
+        /* Preview panel */
+        .et-preview-wrap { border: 1px solid var(--color-light); border-radius: var(--radius-md); overflow: hidden; margin-top: var(--space-lg); background: #f8f8f8; }
+        .et-preview-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px var(--space-md); background: var(--color-off-white); border-bottom: 1px solid var(--color-light); }
+        .et-preview-label { font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); color: var(--color-gray); text-transform: uppercase; letter-spacing: 0.05em; }
+        .et-preview-iframe { width: 100%; min-height: 300px; border: none; display: block; background: #fff; }
+
+        /* Status banner */
+        .et-status { padding: var(--space-md) var(--space-lg); border-radius: var(--radius-md); font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); display: none; margin-top: var(--space-lg); }
+        .et-status--success { background: rgba(34,197,94,0.1); color: #15803d; border: 1px solid rgba(34,197,94,0.25); }
+        .et-status--error   { background: rgba(239,68,68,0.1);  color: #dc2626; border: 1px solid rgba(239,68,68,0.25); }
+
+        .et-actions { display: flex; gap: var(--space-sm); justify-content: flex-end; margin-top: var(--space-lg); padding-top: var(--space-lg); border-top: 1px solid var(--color-light); }
+    </style>
+</head>
+<body class="admin-body">
+
+    <!-- ====================================================== SIDEBAR -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-logo">
+            <a href="/admin/index.html" class="sidebar-logo-link">
+                <span class="sidebar-logo-text">Cascade Apartment 4</span>
+                <span class="sidebar-logo-badge">Admin</span>
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="sidebar-nav-section">
+                <span class="sidebar-nav-section-title">MAIN</span>
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item"><a href="/admin/index.html" class="sidebar-nav-link"><svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Dashboard</span></a></li>
+                    <li class="sidebar-nav-item"><a href="/admin/bookings.html" class="sidebar-nav-link"><svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span>Bookings</span></a></li>
+                    <li class="sidebar-nav-item"><a href="/admin/calendar.html" class="sidebar-nav-link"><svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Calendar</span></a></li>
+                    <li class="sidebar-nav-item"><a href="/admin/guests.html" class="sidebar-nav-link"><svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Guests</span></a></li>
+                    <li class="sidebar-nav-item"><a href="/admin/emails.html" class="sidebar-nav-link"><svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>Emails</span></a></li>
+                    <li class="sidebar-nav-item active"><a href="/admin/email-templates.html" class="sidebar-nav-link"><svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg><span>Email Templates</span></a></li>
+                </ul>
+            </div>
+            <div class="sidebar-nav-section">
+                <span class="sidebar-nav-section-title">MANAGEMENT</span>
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item"><a href="/admin/rates.html" class="sidebar-nav-link"><svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>Rates &amp; Pricing</span></a></li>
+                    <li class="sidebar-nav-item"><a href="/admin/reports.html" class="sidebar-nav-link"><svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Reports</span></a></li>
+                </ul>
+            </div>
+            <div class="sidebar-nav-section">
+                <span class="sidebar-nav-section-title">INTEGRATIONS</span>
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item"><a href="/admin/ical-sync.html" class="sidebar-nav-link"><svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg><span>iCal Sync</span></a></li>
+                    <li class="sidebar-nav-item"><a href="/admin/payments.html" class="sidebar-nav-link"><svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span>Payments</span></a></li>
+                </ul>
+            </div>
+            <div class="sidebar-nav-section">
+                <span class="sidebar-nav-section-title">SYSTEM</span>
+                <ul class="sidebar-nav-list">
+                    <li class="sidebar-nav-item"><a href="/admin/settings.html" class="sidebar-nav-link"><svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Settings</span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- ====================================================== MAIN -->
+    <main class="admin-main">
+        <header class="admin-topbar">
+            <div class="admin-topbar__breadcrumb">
+                <a href="/admin/index.html" class="admin-topbar__breadcrumb-link">Dashboard</a>
+                <span class="admin-topbar__breadcrumb-separator">&rsaquo;</span>
+                <span class="admin-topbar__breadcrumb-current">Email Templates</span>
+            </div>
+            <div class="admin-topbar__actions">
+                <div class="admin-topbar__user">
+                    <div class="admin-topbar__user-avatar" id="userAvatar">AD</div>
+                    <span class="admin-topbar__user-name" id="userName">Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="admin-content">
+            <div class="admin-page-header">
+                <div>
+                    <h1 class="admin-page-header__title">Email Templates</h1>
+                    <p class="admin-page-header__description">Select a template, customise the content, and send directly to a guest.</p>
+                </div>
+            </div>
+
+            <div class="et-layout">
+
+                <!-- ── Template list ── -->
+                <div class="et-list">
+                    <div class="et-list-header">Templates</div>
+                    <div class="et-item active" data-tpl="booking_confirmation">
+                        <div class="et-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                        <div><div class="et-item-name">Booking Confirmation</div><div class="et-item-desc">Sent after a booking is confirmed</div></div>
+                    </div>
+                    <div class="et-item" data-tpl="check_in_reminder">
+                        <div class="et-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                        <div><div class="et-item-name">Check-in Reminder</div><div class="et-item-desc">Sent 3 days before arrival</div></div>
+                    </div>
+                    <div class="et-item" data-tpl="check_in_instructions">
+                        <div class="et-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
+                        <div><div class="et-item-name">Check-in Instructions</div><div class="et-item-desc">Access codes and arrival info</div></div>
+                    </div>
+                    <div class="et-item" data-tpl="check_out_reminder">
+                        <div class="et-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+                        <div><div class="et-item-name">Check-out Reminder</div><div class="et-item-desc">Sent the evening before departure</div></div>
+                    </div>
+                    <div class="et-item" data-tpl="post_stay_thanks">
+                        <div class="et-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+                        <div><div class="et-item-name">Post-Stay Thank You</div><div class="et-item-desc">Thank guest and request a review</div></div>
+                    </div>
+                    <div class="et-item" data-tpl="special_offer">
+                        <div class="et-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
+                        <div><div class="et-item-name">Special Offer</div><div class="et-item-desc">Promotional rate for returning guests</div></div>
+                    </div>
+                    <div class="et-item" data-tpl="enquiry_reply">
+                        <div class="et-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg></div>
+                        <div><div class="et-item-name">Enquiry Reply</div><div class="et-item-desc">General reply to a guest enquiry</div></div>
+                    </div>
+                    <div class="et-item" data-tpl="custom">
+                        <div class="et-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+                        <div><div class="et-item-name">Custom Email</div><div class="et-item-desc">Write a free-form email</div></div>
+                    </div>
+                </div>
+
+                <!-- ── Compose panel ── -->
+                <div class="et-compose">
+                    <div class="et-compose-header">
+                        <span class="et-compose-title" id="composePanelTitle">Booking Confirmation</span>
+                        <button class="admin-btn admin-btn--outline admin-btn--sm" id="btnPreview" type="button">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            Preview
+                        </button>
+                    </div>
+                    <div class="et-compose-body">
+                        <form id="composeForm" novalidate>
+
+                            <!-- Recipient -->
+                            <div class="et-field">
+                                <label class="et-label" for="toEmail">To <span style="color:#dc2626">*</span></label>
+                                <input type="email" id="toEmail" class="et-input" placeholder="guest@example.com" required>
+                            </div>
+
+                            <!-- Booking selector (optional) -->
+                            <div class="et-field">
+                                <label class="et-label" for="bookingSelect">Link to booking <span style="color:var(--color-gray);font-weight:400;">(optional — auto-fills variables)</span></label>
+                                <select id="bookingSelect" class="et-input">
+                                    <option value="">— Select a booking —</option>
+                                </select>
+                            </div>
+
+                            <!-- Subject -->
+                            <div class="et-field">
+                                <label class="et-label" for="emailSubject">Subject <span style="color:#dc2626">*</span></label>
+                                <input type="text" id="emailSubject" class="et-input" placeholder="Subject line" required>
+                            </div>
+
+                            <!-- Variable chips -->
+                            <div class="et-field">
+                                <div class="et-var-hint">Click a variable to insert it at the cursor position in the body:</div>
+                                <div class="et-vars">
+                                    <span class="et-var" data-var="{{guestName}}">{{guestName}}</span>
+                                    <span class="et-var" data-var="{{checkinDate}}">{{checkinDate}}</span>
+                                    <span class="et-var" data-var="{{checkoutDate}}">{{checkoutDate}}</span>
+                                    <span class="et-var" data-var="{{nights}}">{{nights}}</span>
+                                    <span class="et-var" data-var="{{guests}}">{{guests}}</span>
+                                    <span class="et-var" data-var="{{bookingRef}}">{{bookingRef}}</span>
+                                    <span class="et-var" data-var="{{totalAmount}}">{{totalAmount}}</span>
+                                    <span class="et-var" data-var="{{propertyName}}">{{propertyName}}</span>
+                                </div>
+                            </div>
+
+                            <!-- Body -->
+                            <div class="et-field">
+                                <label class="et-label" for="emailBody">Message body <span style="color:#dc2626">*</span></label>
+                                <textarea id="emailBody" class="et-input et-textarea" placeholder="Email body…" required></textarea>
+                            </div>
+
+                            <!-- Preview iframe -->
+                            <div class="et-preview-wrap" id="previewWrap" style="display:none;">
+                                <div class="et-preview-bar">
+                                    <span class="et-preview-label">Preview</span>
+                                    <button type="button" class="admin-btn admin-btn--outline admin-btn--sm" id="btnClosePreview">Close</button>
+                                </div>
+                                <iframe id="previewFrame" class="et-preview-iframe" title="Email preview" sandbox="allow-same-origin"></iframe>
+                            </div>
+
+                            <!-- Status -->
+                            <div class="et-status" id="sendStatus"></div>
+
+                            <!-- Actions -->
+                            <div class="et-actions">
+                                <button type="button" class="admin-btn admin-btn--outline" id="btnReset">Reset</button>
+                                <button type="submit" class="admin-btn admin-btn--primary" id="btnSend">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                                    Send Email
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/app.js"></script>
+    <script src="../js/admin.js"></script>
+    <script src="../js/data.js"></script>
+    <script>
+    (function () {
+        'use strict';
+
+        var PROPERTY_NAME = 'Cascade Apartment 4';
+        var FROM_EMAIL    = 'cascadeskiapartments@gmail.com';
+
+        /* ── Template definitions ──────────────────────────────────── */
+        var TEMPLATES = {
+            booking_confirmation: {
+                name: 'Booking Confirmation',
+                subject: 'Booking Confirmed — {{propertyName}} · Ref {{bookingRef}}',
+                body: 'Hi {{guestName}},\n\nGreat news — your booking at {{propertyName}} is confirmed!\n\nBooking details:\n• Reference: {{bookingRef}}\n• Check-in: {{checkinDate}} (from 2:00 pm)\n• Check-out: {{checkoutDate}} (by 10:00 am)\n• Nights: {{nights}}\n• Guests: {{guests}}\n• Total: {{totalAmount}}\n\nWe\'ll send check-in instructions closer to your arrival date. In the meantime, if you have any questions please reply to this email or contact us at ' + FROM_EMAIL + '.\n\nWe look forward to welcoming you to Mt Baw Baw!\n\nWarm regards,\nCascade Apartment 4'
+            },
+            check_in_reminder: {
+                name: 'Check-in Reminder',
+                subject: 'Your stay at {{propertyName}} is in 3 days!',
+                body: 'Hi {{guestName}},\n\nJust a friendly reminder that your stay at {{propertyName}} is coming up in 3 days!\n\n• Check-in: {{checkinDate}} from 2:00 pm\n• Check-out: {{checkoutDate}} by 10:00 am\n• Guests: {{guests}}\n• Booking ref: {{bookingRef}}\n\nCheck-in instructions with access codes will be sent separately closer to your arrival.\n\nIf you have any questions or special requests, please don\'t hesitate to get in touch.\n\nSee you soon!\n\nCascade Apartment 4\n' + FROM_EMAIL
+            },
+            check_in_instructions: {
+                name: 'Check-in Instructions',
+                subject: 'Check-in Instructions — {{propertyName}}',
+                body: 'Hi {{guestName}},\n\nWe\'re looking forward to welcoming you tomorrow! Here are your check-in details:\n\nAddress: Cascade Apartment 4, Baw Baw Village, Mt Baw Baw VIC 3833\n\nCheck-in: {{checkinDate}} from 2:00 pm\nCheck-out: {{checkoutDate}} by 10:00 am\n\nACCESS:\nThe apartment uses a key lock box. Your access code will be provided separately via SMS on the day of arrival.\n\nPARKING:\nParking is available directly in front of the apartment.\n\nWIFI:\nNetwork and password details are displayed inside the apartment.\n\nIf you have any trouble, please contact us immediately at ' + FROM_EMAIL + '.\n\nEnjoy your stay!\n\nCascade Apartment 4'
+            },
+            check_out_reminder: {
+                name: 'Check-out Reminder',
+                subject: 'Check-out tomorrow — {{propertyName}}',
+                body: 'Hi {{guestName}},\n\nThis is a friendly reminder that your check-out from {{propertyName}} is tomorrow, {{checkoutDate}} by 10:00 am.\n\nBefore you leave, please:\n✓ Return all keys/access fobs to the lock box\n✓ Ensure all windows and doors are locked\n✓ Strip your beds and leave used linen in the laundry\n✓ Take all rubbish to the bins outside\n✓ Turn off all appliances, lights and the heating\n\nWe hope you had a wonderful stay at Mt Baw Baw! We\'d love to see you again — feel free to book directly at any time.\n\nSafe travels,\nCascade Apartment 4\n' + FROM_EMAIL
+            },
+            post_stay_thanks: {
+                name: 'Post-Stay Thank You',
+                subject: 'Thank you for staying at {{propertyName}}!',
+                body: 'Hi {{guestName}},\n\nThank you so much for staying at {{propertyName}}. We hope you had a fantastic time at Mt Baw Baw!\n\nWe\'d really appreciate it if you could take a moment to leave us a review — it helps other guests find us and helps us keep improving.\n\nWe\'d love to have you back next season. If you\'d like to book again or hear about any special offers, just reply to this email.\n\nWarm regards,\nCascade Apartment 4\n' + FROM_EMAIL
+            },
+            special_offer: {
+                name: 'Special Offer',
+                subject: 'Exclusive offer for you — {{propertyName}}',
+                body: 'Hi {{guestName}},\n\nAs a valued past guest of {{propertyName}}, we\'d like to offer you an exclusive rate for an upcoming stay.\n\nWe have availability at Mt Baw Baw this ski season and would love to welcome you back. Please reply to this email to find out more or to make a reservation.\n\nAll bookings can also be made directly at our website.\n\nWarm regards,\nCascade Apartment 4\n' + FROM_EMAIL
+            },
+            enquiry_reply: {
+                name: 'Enquiry Reply',
+                subject: 'Re: Your enquiry about {{propertyName}}',
+                body: 'Hi {{guestName}},\n\nThank you for your enquiry about {{propertyName}} at Mt Baw Baw.\n\n[Add your reply here]\n\nIf you have any further questions, please don\'t hesitate to get in touch.\n\nKind regards,\nCascade Apartment 4\n' + FROM_EMAIL
+            },
+            custom: {
+                name: 'Custom Email',
+                subject: '',
+                body: ''
+            }
+        };
+
+        /* ── State ─────────────────────────────────────────────────── */
+        var currentTpl = 'booking_confirmation';
+        var currentBooking = null;
+
+        /* ── DOM refs ──────────────────────────────────────────────── */
+        var toEmailEl      = document.getElementById('toEmail');
+        var bookingSelEl   = document.getElementById('bookingSelect');
+        var subjectEl      = document.getElementById('emailSubject');
+        var bodyEl         = document.getElementById('emailBody');
+        var statusEl       = document.getElementById('sendStatus');
+        var previewWrapEl  = document.getElementById('previewWrap');
+        var previewFrameEl = document.getElementById('previewFrame');
+        var composeTitleEl = document.getElementById('composePanelTitle');
+
+        /* ── Load bookings into selector ───────────────────────────── */
+        function loadBookings() {
+            if (!window.CA3Data) return;
+            var bookings = window.CA3Data.getBookings()
+                .filter(function(b){ return b.status !== 'cancelled'; })
+                .sort(function(a,b){ return (b.checkIn || '').localeCompare(a.checkIn || ''); });
+
+            bookings.forEach(function(b) {
+                var opt = document.createElement('option');
+                opt.value = b.id;
+                var label = (b.guestName || 'Guest') + ' · ' + (b.checkIn || '') + ' – ' + (b.checkOut || '');
+                opt.textContent = label;
+                bookingSelEl.appendChild(opt);
+            });
+        }
+
+        /* ── Variable resolution ───────────────────────────────────── */
+        function fmtDate(str) {
+            if (!str) return '';
+            try { return new Date(str + 'T00:00:00').toLocaleDateString('en-AU', { weekday:'short', day:'numeric', month:'long', year:'numeric' }); }
+            catch(e) { return str; }
+        }
+
+        function resolve(text, booking) {
+            var b = booking || {};
+            var nights = 0;
+            if (b.checkIn && b.checkOut) {
+                nights = Math.round((new Date(b.checkOut + 'T00:00:00') - new Date(b.checkIn + 'T00:00:00')) / 86400000);
+            }
+            return text
+                .replace(/\{\{guestName\}\}/g,    b.guestName  || '[Guest Name]')
+                .replace(/\{\{checkinDate\}\}/g,   fmtDate(b.checkIn)  || '[Check-in Date]')
+                .replace(/\{\{checkoutDate\}\}/g,  fmtDate(b.checkOut) || '[Check-out Date]')
+                .replace(/\{\{nights\}\}/g,        nights || '[Nights]')
+                .replace(/\{\{guests\}\}/g,        b.guests     || '[Guests]')
+                .replace(/\{\{bookingRef\}\}/g,    b.ref || b.id || '[Ref]')
+                .replace(/\{\{totalAmount\}\}/g,   b.total ? ('$' + Number(b.total).toLocaleString('en-AU')) : '[Total]')
+                .replace(/\{\{propertyName\}\}/g,  PROPERTY_NAME);
+        }
+
+        /* ── Load template into form ───────────────────────────────── */
+        function loadTemplate(key) {
+            currentTpl = key;
+            var tpl = TEMPLATES[key] || TEMPLATES.custom;
+            composeTitleEl.textContent = tpl.name;
+            subjectEl.value = resolve(tpl.subject, currentBooking);
+            bodyEl.value    = resolve(tpl.body,    currentBooking);
+            hideStatus();
+            hidePreview();
+        }
+
+        /* ── Template list click ───────────────────────────────────── */
+        document.querySelectorAll('.et-item').forEach(function(item) {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.et-item').forEach(function(i){ i.classList.remove('active'); });
+                item.classList.add('active');
+                loadTemplate(item.dataset.tpl);
+            });
+        });
+
+        /* ── Booking selector change ───────────────────────────────── */
+        bookingSelEl.addEventListener('change', function() {
+            var id = this.value;
+            if (!id || !window.CA3Data) {
+                currentBooking = null;
+            } else {
+                currentBooking = window.CA3Data.getBookings().find(function(b){ return b.id === id; }) || null;
+                if (currentBooking && currentBooking.guestEmail) {
+                    toEmailEl.value = currentBooking.guestEmail;
+                }
+            }
+            loadTemplate(currentTpl);
+        });
+
+        /* ── Variable chip insertion ───────────────────────────────── */
+        document.querySelectorAll('.et-var').forEach(function(chip) {
+            chip.addEventListener('click', function() {
+                var variable = chip.dataset.var;
+                var start = bodyEl.selectionStart;
+                var end   = bodyEl.selectionEnd;
+                var text  = bodyEl.value;
+                bodyEl.value = text.slice(0, start) + variable + text.slice(end);
+                bodyEl.focus();
+                bodyEl.selectionStart = bodyEl.selectionEnd = start + variable.length;
+            });
+        });
+
+        /* ── Preview ───────────────────────────────────────────────── */
+        function buildPreviewHtml() {
+            var subject = resolve(subjectEl.value, currentBooking);
+            var body    = resolve(bodyEl.value,    currentBooking);
+            var lines   = body.split('\n').map(function(l){ return l === '' ? '<br>' : '<p style="margin:0 0 0.5em;">' + l.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</p>'; }).join('');
+            return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'
+                + 'body{font-family:Arial,sans-serif;font-size:14px;color:#222;padding:24px;max-width:640px;margin:0 auto;}'
+                + 'h2{font-size:16px;margin-bottom:20px;color:#0f2744;border-bottom:2px solid #c9a84c;padding-bottom:10px;}'
+                + '</style></head><body>'
+                + '<h2>' + subject.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</h2>'
+                + lines
+                + '</body></html>';
+        }
+
+        document.getElementById('btnPreview').addEventListener('click', function() {
+            var html = buildPreviewHtml();
+            var doc = previewFrameEl.contentDocument || previewFrameEl.contentWindow.document;
+            doc.open(); doc.write(html); doc.close();
+            previewWrapEl.style.display = '';
+            setTimeout(function(){ try { previewFrameEl.style.height = (doc.body.scrollHeight + 32) + 'px'; } catch(e){} }, 200);
+        });
+
+        document.getElementById('btnClosePreview').addEventListener('click', hidePreview);
+        function hidePreview() { previewWrapEl.style.display = 'none'; }
+
+        /* ── Reset ─────────────────────────────────────────────────── */
+        document.getElementById('btnReset').addEventListener('click', function() {
+            loadTemplate(currentTpl);
+            toEmailEl.value = currentBooking && currentBooking.guestEmail ? currentBooking.guestEmail : '';
+        });
+
+        /* ── Status helpers ────────────────────────────────────────── */
+        function showStatus(msg, type) {
+            statusEl.textContent = msg;
+            statusEl.className = 'et-status et-status--' + type;
+            statusEl.style.display = '';
+            statusEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        function hideStatus() { statusEl.style.display = 'none'; }
+
+        /* ── Send ──────────────────────────────────────────────────── */
+        document.getElementById('composeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var to      = toEmailEl.value.trim();
+            var subject = resolve(subjectEl.value.trim(), currentBooking);
+            var body    = resolve(bodyEl.value.trim(), currentBooking);
+
+            if (!to || !subject || !body) {
+                showStatus('Please fill in To, Subject and Message before sending.', 'error');
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) {
+                showStatus('Please enter a valid email address.', 'error');
+                return;
+            }
+
+            var btn = document.getElementById('btnSend');
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+            hideStatus();
+
+            var payload = {
+                to:          to,
+                subject:     subject,
+                body:        body,
+                ref:         currentBooking ? (currentBooking.ref || currentBooking.id) : '',
+                guestName:   currentBooking ? currentBooking.guestName  : '',
+                guestEmail:  to,
+                checkin:     currentBooking ? currentBooking.checkIn    : '',
+                checkout:    currentBooking ? currentBooking.checkOut   : '',
+                nights:      currentBooking && currentBooking.checkIn && currentBooking.checkOut
+                                 ? Math.round((new Date(currentBooking.checkOut+'T00:00:00') - new Date(currentBooking.checkIn+'T00:00:00')) / 86400000)
+                                 : 0,
+                guests:      currentBooking ? currentBooking.guests     : '',
+                totalAmount: currentBooking ? currentBooking.total      : ''
+            };
+
+            fetch('/api/send-email', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify(payload)
+            })
+            .then(function(r) { return r.json().then(function(d){ return { ok: r.ok, data: d }; }); })
+            .then(function(res) {
+                if (res.ok) {
+                    showStatus('Email sent successfully to ' + to + '.', 'success');
+                } else {
+                    showStatus('Failed to send: ' + (res.data.error || 'Unknown error'), 'error');
+                }
+            })
+            .catch(function(err) {
+                showStatus('Network error — could not send email. ' + err.message, 'error');
+            })
+            .finally(function() {
+                btn.disabled = false;
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Email';
+            });
+        });
+
+        /* ── Init ──────────────────────────────────────────────────── */
+        loadBookings();
+        loadTemplate('booking_confirmation');
+
+    })();
+    </script>
+</body>
+</html>
