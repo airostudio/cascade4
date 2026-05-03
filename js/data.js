@@ -39,9 +39,15 @@
 
   function seedRates() {
     return {
-      winter:   { label: 'Winter Season',   months: [6,7,8],       ratePerNight: 385, minStay: 2 },
-      standard: { label: 'Standard',        months: [3,4,5,9,10,11], ratePerNight: 285, minStay: 1 },
-      offPeak:  { label: 'Off-peak',        months: [1,2,12],      ratePerNight: 220, minStay: 1 },
+      // Ski Season (Jun–Oct): $855/night. Weekend Fri–Sun min 2 nights,
+      // no Sat check-in. Weeknight Mon–Thu: 2+ nights $855, 1 night $985.
+      skiSeason:   { label: 'Ski Season',    months: [6,7,8,9,10],  ratePerNight: 855, minStay: 2 },
+      // Green Season (Nov–May): CLOSED — no bookings accepted.
+      greenSeason: { label: 'Green Season',  months: [1,2,3,4,5,11,12], ratePerNight: 0, closed: true, minStay: 0 },
+      // Weekend rate label (Fri–Sun within ski season)
+      weekend:     { label: 'Weekend',       ratePerNight: 855, minStay: 2 },
+      // Single weeknight surcharge
+      singleWeeknight: { label: 'Single Weeknight', ratePerNight: 985, minStay: 1 },
       cleaningFee: 100, serviceFeePercent: 5, taxPercent: 10, depositPercent: 30
     };
   }
@@ -95,9 +101,14 @@
     getRateForDate(dateStr) {
       const rates = this.getRates();
       const month = new Date(dateStr).getMonth() + 1;
-      if (rates.winter.months.includes(month))  return rates.winter.ratePerNight;
-      if (rates.offPeak.months.includes(month)) return rates.offPeak.ratePerNight;
-      return rates.standard.ratePerNight;
+      if (rates.greenSeason && rates.greenSeason.months.includes(month)) return 0; // closed
+      return (rates.skiSeason && rates.skiSeason.ratePerNight) || 855;
+    },
+
+    isGreenSeason(dateStr) {
+      const month = new Date(dateStr).getMonth() + 1;
+      const rates = this.getRates();
+      return !!(rates.greenSeason && rates.greenSeason.months.includes(month));
     },
 
     isDateBooked(dateStr) {

@@ -18,7 +18,7 @@
     "mode": "instant",
     "defaultCheckIn": "14:00",
     "defaultCheckOut": "10:00",
-    "minStay": 1,
+    "minStay": 2,
     "maxStay": 30,
     "advanceBookingDays": 365,
     "bookingCutoffHours": 24,

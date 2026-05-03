@@ -89,11 +89,18 @@
           }
         }
 
-        // Weekend surcharge
+        // Rate by day type:
+        // Weekend (Fri=5, Sat=6, Sun=0): $855/night
+        // Weeknight (Mon–Thu): $855 for 2+ nights, $985 single night
         const dayOfWeek = currentDate.getDay();
-        if (dayOfWeek === 5 || dayOfWeek === 6) { // Friday, Saturday
-          nightRate *= 1.1; // 10% weekend surcharge (industry standard)
-          rateName += ' (Weekend)';
+        const isWeeknight = dayOfWeek >= 1 && dayOfWeek <= 4;
+        if (isWeeknight && nights === 1) {
+          nightRate = 985;
+          rateName = 'Single Weeknight';
+        } else if (!isWeeknight) {
+          rateName = 'Weekend';
+        } else {
+          rateName = 'Weeknight';
         }
 
         nightlyBreakdown.push({
@@ -224,6 +231,10 @@
       if (!data.checkin) errors.push({ field: 'checkin', message: 'Check-in date is required' });
       if (!data.checkout) errors.push({ field: 'checkout', message: 'Check-out date is required' });
 
+      // Green Season months (Nov–May): property is CLOSED
+      const GREEN_SEASON_MONTHS = [11, 12, 1, 2, 3, 4, 5];
+      const isGreenSeason = d => GREEN_SEASON_MONTHS.includes(d.getMonth() + 1);
+
       if (data.checkin && data.checkout) {
         const checkinDate = new Date(data.checkin);
         const checkoutDate = new Date(data.checkout);
@@ -238,19 +249,29 @@
           errors.push({ field: 'checkout', message: 'Check-out must be after check-in' });
         }
 
-        const nights = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24));
-        if (nights < this.defaults.minStay) {
-          errors.push({ field: 'checkout', message: `Minimum stay is ${this.defaults.minStay} night(s)` });
+        // Green Season closure (November–May)
+        for (let d = new Date(checkinDate); d < checkoutDate; d.setDate(d.getDate() + 1)) {
+          if (isGreenSeason(d)) {
+            errors.push({ field: 'checkin', message: 'The property is closed during Green Season (November–May). Bookings are available June–October only.' });
+            break;
+          }
         }
+
+        // Saturday check-in not permitted
+        if (checkinDate.getDay() === 6) {
+          errors.push({ field: 'checkin', message: 'Saturday check-in is not available. Please arrive on Friday or Sunday.' });
+        }
+
+        const nights = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24));
         if (nights > this.defaults.maxStay) {
           errors.push({ field: 'checkout', message: `Maximum stay is ${this.defaults.maxStay} nights` });
         }
 
-        // Weekend minimum stay: Fri/Sat/Sun check-in requires 2 nights minimum
+        // Weekend (Fri/Sun) requires minimum 2 nights
         if (nights === 1) {
-          const dow = checkinDate.getDay(); // 0=Sun, 5=Fri, 6=Sat
-          if (dow === 5 || dow === 6 || dow === 0) {
-            errors.push({ field: 'checkout', message: 'Weekend stays (Fri, Sat & Sun) require a minimum of 2 nights' });
+          const dow = checkinDate.getDay();
+          if (dow === 5 || dow === 0) {
+            errors.push({ field: 'checkout', message: 'Weekend check-in (Friday & Sunday) requires a minimum of 2 nights' });
           }
         }
       }
@@ -472,7 +493,7 @@
 
       if (checkin && checkout) {
         const pricing = BookingEngine.calculatePrice({
-          baseRate: 289,
+          baseRate: 855,
           checkin,
           checkout,
           adults,
@@ -514,7 +535,15 @@
         if (!this.value) return;
         const d   = new Date(this.value + 'T00:00:00');
         const dow = d.getDay();
-        const minNights = (dow === 5 || dow === 6 || dow === 0) ? 2 : 1;
+        // Saturday check-in not allowed
+        if (dow === 6) {
+          window.CascadeApp?.showToast('Saturday check-in is not available. Please select Friday or Sunday.', 'error');
+          this.value = '';
+          checkoutEl.min = '';
+          return;
+        }
+        // Weekend (Fri/Sun) = 2 night minimum; Mon–Thu = 1 night minimum
+        const minNights = (dow === 5 || dow === 0) ? 2 : 1;
         const minDate   = new Date(d);
         minDate.setDate(minDate.getDate() + minNights);
         const minStr = minDate.toISOString().split('T')[0];
@@ -613,7 +642,7 @@
       })();
 
       const finalPricing = BookingEngine.calculatePrice({
-        baseRate: 289,
+        baseRate: 855,
         checkin: ci,
         checkout: co,
         adults,
